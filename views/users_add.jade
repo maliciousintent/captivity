@@ -1,8 +1,12 @@
 extends layout
 
 block content
-  h1 Dettagli utente
-  p Inserisci i dati richiesti per creare un nuovo utente.
+  .spacer
+  .row
+    .span12
+      h3 Dettagli utente
+      p Inserisci i dati richiesti per creare un nuovo utente.
+  hr
   
   form.form-horizontal(action='/users', method='POST', enctype='multipart/form-data')
     input(type='hidden', name='_id', value='#{pagina._id || ""}')
@@ -75,10 +79,10 @@ block content
               span.label.label-warning Attenzione
               |  devi reinserire la password per poter salvare le modifiche.
             
+    hr
 
-
-    .form-actions
-      button.btn.btn-success.btn-large(type='submit')
-       i.icon-white.icon-ok
-       |  Salva utente
+    button.btn.btn-success.btn-large.pull-right(type='submit')
+      i.icon-white.icon-ok
+      |  Salva utente
       
+  .spacer
