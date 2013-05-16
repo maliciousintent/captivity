@@ -19,29 +19,36 @@ block content
         table.table.table-striped
           thead
             tr
-              th Nome corso
-              th Data creazione
-              th &nbsp;
+              th.span4 Nome corso
+              th.span3 Data creazione
+              th.span1 Stato
+              th.span3 &nbsp;
           tbody
             each item in courses
               tr
                 td #{item.doc.name}
                 td #{moment(item.doc.created_on).format('LLL')}
                 td
-                  .pull-right
-                    a.btn.input-small(href='/courses/form/#{item.doc._id}')
-                      i.icon-pencil.icon-white
-                      |  Modifica
-                    | &nbsp;
-                    if item.doc.enabled
-                      a.btn.btn-danger.input-small(href='/courses/disable/#{item.doc._id}')
-                        i.icon-ban-circle.icon-white
-                        |  Disabilita
-                    else
-                      a.btn.btn-info.input-small(href='/courses/disable/#{item.doc._id}')
-                        i.icon-ok.icon-white
-                        |  Abilita
-      
+                  if item.doc.enabled
+                    a(title='Corso attivo')
+                      i.icon-ok
+                  else
+                    a(title='Corso disabilitato')
+                      i.icon-remove
+                td.actions
+                  
+                  if item.doc.enabled
+                    a.btn.btn-small.btn-danger(href='/courses/disable/#{item.doc._id}')
+                      i.icon-ban-circle.icon-white
+                      |  Disabilita
+                  else
+                    a.btn.btn-small.btn-info(href='/courses/disable/#{item.doc._id}')
+                      i.icon-ok.icon-white
+                      |  Abilita
+                  | &nbsp;
+                  a.btn.btn-small(href='/courses/form/#{item.doc._id}')
+                    i.icon-pencil.icon-white
+                    |  Modifica
       
       
       else

@@ -16,6 +16,9 @@
     "asciify": "~1.2.0",
     "string-format": "~0.2.1",
     "connect-flash": "~0.1.1",
-    "moment": "~2.0.0"
+    "moment": "~2.0.0",
+    "unzip": "~0.1.7",
+    "node-uuid": "~1.4.0",
+    "tmp": "0.0.18"
   }
 }

@@ -83,48 +83,55 @@ body
 .spacer
   height 15px
 
-.btn
-  background-image none
-  box-shadow none
-  text-shadow none
-  border none
+.main
+  .btn
+    background-image none
+    box-shadow none
+    text-shadow none
+    border none
 
-  @extends .raleway
-  letter-spacing 0px
-  font-size 13px
+    @extends .raleway
+    letter-spacing 0px
+    font-size 13px
 
-  transition all 0.2s ease
+    transition all 0.2s ease
 
-  _btncolor = #999
-  color #FFF
-  background _btncolor
-  border 2px solid _btncolor
-  &:hover
-    background lighten(_btncolor, 10%)
-    box-shadow 0 0 3px #FFF
+    _btncolor = #999
     color #FFF
+    background _btncolor
+    border 2px solid _btncolor
+    &:hover
+      background lighten(_btncolor, 10%)
+      box-shadow 0 0 3px #FFF
+      color #FFF
 
-  &.btn-primary
-    _btncolor = #006dcc
-    background _btncolor
-    border 2px solid _btncolor
-    &:hover
-      background lighten(_btncolor, 10%)
-  &.btn-danger
-    _btncolor = #da4f49
-    background _btncolor
-    border 2px solid _btncolor
-    &:hover
-      background lighten(_btncolor, 10%)
-  &.btn-info
-    _btncolor = #28b5e5
-    background _btncolor
-    border 2px solid _btncolor
-    &:hover
-      background lighten(_btncolor, 10%)
-  &.btn-success
-    _btncolor = #5bb75b
-    background _btncolor
-    border 2px solid _btncolor
-    &:hover
-      background lighten(_btncolor, 10%)
+    &.btn-primary
+      _btncolor = #006dcc
+      background _btncolor
+      border 2px solid _btncolor
+      &:hover
+        background lighten(_btncolor, 10%)
+    &.btn-danger
+      _btncolor = #da4f49
+      background _btncolor
+      border 2px solid _btncolor
+      &:hover
+        background lighten(_btncolor, 10%)
+    &.btn-info
+      _btncolor = #28b5e5
+      background _btncolor
+      border 2px solid _btncolor
+      &:hover
+        background lighten(_btncolor, 10%)
+    &.btn-success
+      _btncolor = #5bb75b
+      background _btncolor
+      border 2px solid _btncolor
+      &:hover
+        background lighten(_btncolor, 10%)
+
+
+  table.table
+    tr
+      td.actions
+        text-align right
