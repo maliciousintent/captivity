@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  
+  h2 Corsi
+  
+  if courses.length > 0
+  
+    ul
+      each item in courses
+        li #{item.doc._id}
+  
+  else
+    
+    p.alert.alert-info Non è stato inserito ancora alcun corso.

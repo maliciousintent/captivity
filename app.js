@@ -9,6 +9,9 @@ var express = require('express')
   , colors = require('colors')
   , asciify = require('asciify');
 
+require('sugar');
+require('string-format');
+
 clog.info('Booting...');
 
 if (!process.env.DATABASE_URL) {
@@ -17,14 +20,12 @@ if (!process.env.DATABASE_URL) {
 }
 
 asciify('Captivity', function (err, res) { 
-  console.log(res.bold.yellow + '\t\t\t\t\t     LMS Server'.bold);
+  console.log(res.bold.blue + '\t\t\t\t\t     LMS Server'.bold);
   console.log();
 });
 
 var app = express();
 
-
-// all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -36,7 +37,6 @@ app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// development only
 if ('development' == app.get('env')) {
   app.use(express.logger('dev'));
   app.use(express.errorHandler());
@@ -47,7 +47,11 @@ require('./routes/users.js')(app);
 require('./routes/courses.js')(app);
 require('./routes/scorm_api.js')(app);
 
+app.get('/', function (req, res) {
+  res.redirect('/courses');
+});
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+
+http.createServer(app).listen(app.get('port'), function () {
+  clog.ok('Application started at {0} on port {1}'.format(new Date(), app.get('port')));
 });

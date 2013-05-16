@@ -8,10 +8,26 @@ var db = require('nano')(process.env.DATABASE_URL)
   , clog = require('clog');
 
 
+function coursesList(req, res, next) {
+  
+  db.view('lms', 'courses', { include_docs: true }, function (err, doc) {
+    if (err) {
+      return next(err);
+    }
+    
+    res.render('courses_list', {
+      courses: doc.rows
+    });
+  });
+  
+}
+
+
+
 module.exports = function (app) {
-  var PREFIX = '/courses/';
+  var PREFIX = '/courses';
   
-  
+  app.get(PREFIX, coursesList);
 };
  
  
