@@ -1,8 +1,12 @@
 extends layout
 
 block content
-  h1 Dettagli corso
-  p Inserisci i dati richiesti per creare un nuovo corso SCORM.
+  .spacer
+  .row
+    .span12
+      h3 Dettagli corso
+      p Inserisci i dati richiesti per creare un nuovo corso SCORM.
+  hr
   
   form.form-horizontal(action='/courses', method='POST', enctype='multipart/form-data')
     input(type='hidden', name='_id', value='#{pagina._id || ""}')
@@ -87,10 +91,15 @@ block content
             | (Ma non nominare MIA MADRE!)
       
 
-    .form-actions
-      button.btn.btn-success.btn-large(type='submit')
-       i.icon-white.icon-ok
-       |  Salva corso
+    hr
+
+    button.btn.btn-success.btn-large.pull-right(type='submit')
+      i.icon-white.icon-ok
+      |  Salva corso
+
+    .clearfix
+
+  .spacer
       
 
 block scripts
