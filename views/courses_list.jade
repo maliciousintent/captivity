@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  
+  .spacer
   .row
     .span8
       h3 Corsi
@@ -11,7 +11,8 @@ block content
       a.btn.pull-right.btn-success(href='/courses/form')
         i.icon-white.icon-upload
         |  Carica nuovo corso
-        
+  hr
+
   .row
     .span12
       if courses.length > 0
@@ -19,22 +20,20 @@ block content
         table.table.table-striped
           thead
             tr
+              th.span1 Stato
               th.span4 Nome corso
               th.span3 Data creazione
-              th.span1 Stato
               th.span3 &nbsp;
           tbody
             each item in courses
               tr
-                td #{item.doc.name}
-                td #{moment(item.doc.created_on).format('LLL')}
                 td
                   if item.doc.enabled
-                    a(title='Corso attivo')
-                      i.icon-ok
+                    img.image-icon(src='/img/icon-status-ok.png', title='Corso attivo')
                   else
-                    a(title='Corso disabilitato')
-                      i.icon-remove
+                    img.image-icon(src='/img/icon-status-error.png', title='Corso disabilitato')
+                td #{item.doc.name}
+                td #{moment(item.doc.created_on).format('LLL')}
                 td.actions
                   
                   if item.doc.enabled
