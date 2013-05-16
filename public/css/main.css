@@ -222,6 +222,10 @@ hr {
 .main .alert {
   border-width: 2px;
 }
+.main table.table tr th.text-center,
+.main table.table tr td.text-center {
+  text-align: center;
+}
 .main table.table tr th {
   font-size: 13px;
 }

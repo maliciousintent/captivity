@@ -8,7 +8,7 @@ block content
       
     .span4
       .spacer
-      a.btn.pull-right.btn-success(href='/courses/form')
+      a.btn.pull-right.btn-primary(href='/courses/form')
         i.icon-white.icon-upload
         |  Carica nuovo corso
   hr
@@ -20,20 +20,20 @@ block content
         table.table.table-striped
           thead
             tr
-              th(style="width: 50px;") Stato
               th(style="width: auto;") Nome corso
+              th.text-center(style="width: 50px;") Stato
               th(style="width: auto;") Data creazione
               th(style="width: 210px;") &nbsp;
           tbody
             each item in courses
               tr
                 td
+                  a(href='/player/#{item.doc.url}', target='blank') #{item.doc.name}
+                td.text-center
                   if item.doc.enabled
                     img.image-icon(src='/img/icon-status-ok.png', title='Corso attivo')
                   else
                     img.image-icon(src='/img/icon-status-error.png', title='Corso disabilitato')
-                td
-                  a(href='/player/#{item.doc.url}', target='blank') #{item.doc.name}
                 td #{moment(item.doc.created_on).format('LLL')}
                 td.actions
                   
