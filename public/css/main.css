@@ -247,6 +247,55 @@ hr {
 .main table.table tr:last-child td {
   border-bottom: 2px solid #e2e2e2;
 }
+.main .bootstrap-select .filter-option {
+  width: 175px;
+  text-align: left;
+}
+.main .bootstrap-select .btn-dropdown {
+  background-color: #fff;
+  border-color: #fff;
+  -webkit-box-shadow: 0 0 2px rgba(0,0,0,0.3);
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+  color: #333;
+  outline: none;
+}
+.main .bootstrap-select .btn-dropdown span.caret {
+  opacity: 0.3;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  filter: alpha(opacity=30);
+}
+.main .bootstrap-select .btn-dropdown:hover {
+  background: #fff;
+}
+.main .bootstrap-select.open .btn {
+  background: #fff;
+  -webkit-box-shadow: 0 0 5px rgba(40,181,229,0.7);
+  box-shadow: 0 0 5px rgba(40,181,229,0.7);
+  outline: none;
+}
+.main .bootstrap-select.open .btn:hover {
+  background: #fff;
+}
+.main .bootstrap-select ul.dropdown-menu {
+  border: none;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  margin-top: 5px;
+}
+.main .bootstrap-select ul.dropdown-menu li a {
+  color: #333;
+  cursor: pointer;
+  padding-left: 10px;
+}
+.main .bootstrap-select ul.dropdown-menu li:hover a {
+  background: #28b5e5;
+  color: #fff;
+}
+.main .bootstrap-select ul.dropdown-menu li:last-child a {
+  border: none;
+}
 .main form fieldset {
   padding-bottom: 10px;
 }
