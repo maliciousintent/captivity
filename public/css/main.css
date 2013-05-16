@@ -130,6 +130,20 @@ hr {
   height: 3px;
   background: #e2e2e2;
 }
+.main a {
+  color: #6b6b6b;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.main a:hover {
+  color: #28b5e5;
+  border-bottom-color: rgba(40,181,229,0.5);
+}
 .main .btn {
   background-image: none;
   -webkit-box-shadow: none;
