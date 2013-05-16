@@ -21,11 +21,14 @@ var db = require('nano')(process.env.DATABASE_URL)
  * cmi.session_time        s
  * cmi.total_time          only LMS, r/o
  */
+
+function postSCORM(req, res, next) {
+  res.status(200).json({ error: 'E_NOT_IMPLEMENTED', message: 'LMS does not implement this function.' });
+}
  
  
 module.exports = function (app) {
-  var PREFIX = '/SCORM/';
-  
-  
+  var PREFIX = '/SCORM';
+  app.post(PREFIX + '/*', postSCORM);
 };
  
