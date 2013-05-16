@@ -48,6 +48,7 @@ if ('development' == app.get('env')) {
 require('./routes/users.js')(app);
 require('./routes/courses.js')(app);
 require('./routes/scorm_api.js')(app);
+require('./routes/player.js')(app);
 
 app.get('/', function (req, res) {
   res.redirect('/courses');

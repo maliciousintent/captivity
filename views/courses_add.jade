@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h1 Crea nuovo corso
+  h1 Dettagli corso
   p Inserisci i dati richiesti per creare un nuovo corso SCORM.
   
   form.form-horizontal(action='/courses', method='POST', enctype='multipart/form-data')
@@ -9,9 +9,15 @@ block content
     input(type='hidden', name='_rev', value='#{pagina._rev || ""}')
     
     if message.length
-      .alert #{message}
+      .alert.alert-success.alert-block
+        p #{message}
     
-    
+    if errors.length > 0
+      .alert.alert-danger.alert-block
+        h4 Siamo spiacenti, si sono verificati i seguenti errori durante l'elaborazione della richiesta:
+        ul
+          for e in errors
+            li #{e}
     
     fieldset
       legend Dati corso
@@ -21,13 +27,15 @@ block content
           label Nome
         .controls
           input.input-block-level(type='text', name='name', value=pagina.name || '', required)
+          .help-block
+            .label.label-important Attenzione!
+            |  Assicurati che non ci siano utenti collegati prima di modificare il nome del corso.
 
       .control-group
         .control-label
           label Indirizzo (URL)
         .controls
           input.input-block-level(type='text', value=pagina.url || '(automatico)', readonly)
-
 
       .control-group
         .control-label
@@ -59,6 +67,14 @@ block content
         .controls
           input(type='file', name='scorm')
           .help-block Seleziona un pacchetto SCORM (.zip da caricare)
+          
+
+      .control-group
+        .control-label
+          label Scorm URI
+        .controls
+          input(type='hidden', name='scorm_uri', value=pagina.scorm || '', readonly)
+          input.input-block-level(type='text', value=pagina.scorm || 'Nessun pacchetto SCORM caricato', disabled)
           
       .control-group
         .control-label

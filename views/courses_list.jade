@@ -32,7 +32,8 @@ block content
                     img.image-icon(src='/img/icon-status-ok.png', title='Corso attivo')
                   else
                     img.image-icon(src='/img/icon-status-error.png', title='Corso disabilitato')
-                td #{item.doc.name}
+                td
+                  a(href='/player/#{item.doc.url}', target='blank') #{item.doc.name}
                 td #{moment(item.doc.created_on).format('LLL')}
                 td.actions
                   
