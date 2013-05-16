@@ -1,4 +1,83 @@
+@import ('nib')
+@import url('http://fonts.googleapis.com/css?family=Raleway:600')
 
+_accent = #28b5e5
+_light = #F2F2F2
+_dark = #181818
+
+.raleway
+  font-family 'Raleway', sans-serif
+  font-weight 600
+  letter-spacing 1px
+
+html,
 body
-  padding-top 60px
+  background url('../img/sidebar-background.png') left top repeat-y _light
+  height 100%
+  width 100%
+
+  &>.main
+    margin-left 120px
+    &>.container
+      margin-left 0
+
+      h1, h2, h3, h4, h5, h6,
+      b, strong
+        @extends .raleway
+
+
+  &>.sidebar
+    position absolute
+    left 0
+    height 100%
+    width 100px
+    background _dark
+
+    .logo
+      display block
+      text-align center
+      margin 20px auto
+      width 50px
+      height 50px
+      img
+        width 50px
+        height 50px
+
+    ul
+      border-top 3px solid darken(_dark, 50%)
+      list-style none
+      margin 0
+      padding 0
+      padding-top 20px
+      li
+        display block
+        a
+          @extends .raleway
+          display block
+          padding 10px 20px
+          text-align right
+          text-transform lowercase
+          font-size 13px
+          color _light
+          transition all 0.2s ease
+          text-decoration none
+          &:hover,
+          &:active,
+          &.active
+            text-decoration none
+            color _accent
+            outline none
+          &:visited,
+          &:link
+            outline none
+          &:active,
+          &.active
+            background darken(_dark, 50%)
+        &.last
+          margin-top 20px
+          padding-top 20px
+          border-top 3px solid darken(_dark, 50%)
+          a
+            opacity 0.7
+
 

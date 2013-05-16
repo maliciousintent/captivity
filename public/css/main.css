@@ -1,3 +1,120 @@
+@import url("http://fonts.googleapis.com/css?family=Raleway:600");
+.raleway,
+html>.main>.container h1,
+body>.main>.container h1,
+html>.main>.container h2,
+body>.main>.container h2,
+html>.main>.container h3,
+body>.main>.container h3,
+html>.main>.container h4,
+body>.main>.container h4,
+html>.main>.container h5,
+body>.main>.container h5,
+html>.main>.container h6,
+body>.main>.container h6,
+html>.main>.container b,
+body>.main>.container b,
+html>.main>.container strong,
+body>.main>.container strong,
+html>.sidebar ul li a,
+body>.sidebar ul li a {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+html,
 body {
-  padding-top: 60px;
+  background: url("../img/sidebar-background.png") left top repeat-y #f2f2f2;
+  height: 100%;
+  width: 100%;
+}
+html>.main,
+body>.main {
+  margin-left: 120px;
+}
+html>.main>.container,
+body>.main>.container {
+  margin-left: 0;
+}
+html>.sidebar,
+body>.sidebar {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 100px;
+  background: #181818;
+}
+html>.sidebar .logo,
+body>.sidebar .logo {
+  display: block;
+  text-align: center;
+  margin: 20px auto;
+  width: 50px;
+  height: 50px;
+}
+html>.sidebar .logo img,
+body>.sidebar .logo img {
+  width: 50px;
+  height: 50px;
+}
+html>.sidebar ul,
+body>.sidebar ul {
+  border-top: 3px solid #0c0c0c;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 20px;
+}
+html>.sidebar ul li,
+body>.sidebar ul li {
+  display: block;
+}
+html>.sidebar ul li a,
+body>.sidebar ul li a {
+  display: block;
+  padding: 10px 20px;
+  text-align: right;
+  text-transform: lowercase;
+  font-size: 13px;
+  color: #f2f2f2;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+html>.sidebar ul li a:hover,
+body>.sidebar ul li a:hover,
+html>.sidebar ul li a:active,
+body>.sidebar ul li a:active,
+html>.sidebar ul li a.active,
+body>.sidebar ul li a.active {
+  text-decoration: none;
+  color: #28b5e5;
+  outline: none;
+}
+html>.sidebar ul li a:visited,
+body>.sidebar ul li a:visited,
+html>.sidebar ul li a:link,
+body>.sidebar ul li a:link {
+  outline: none;
+}
+html>.sidebar ul li a:active,
+body>.sidebar ul li a:active,
+html>.sidebar ul li a.active,
+body>.sidebar ul li a.active {
+  background: #0c0c0c;
+}
+html>.sidebar ul li.last,
+body>.sidebar ul li.last {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 3px solid #0c0c0c;
+}
+html>.sidebar ul li.last a,
+body>.sidebar ul li.last a {
+  opacity: 0.7;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  filter: alpha(opacity=70);
 }
