@@ -7,7 +7,8 @@ block content
       h3 Corsi
       
     .span4
-      a.btn.pull-right.btn-primary.btn-large(href='/courses/form')
+      .spacer
+      a.btn.pull-right.btn-success(href='/courses/form')
         i.icon-white.icon-upload
         |  Carica nuovo corso
         
@@ -27,16 +28,17 @@ block content
                 td #{item.doc.name}
                 td #{moment(item.doc.created_on).format('LLL')}
                 td
-                  .btn-group.pull-right
-                    a.btn.btn-small.input-small(href='/courses/form/#{item.doc._id}')
-                      i.icon-pencil
+                  .pull-right
+                    a.btn.input-small(href='/courses/form/#{item.doc._id}')
+                      i.icon-pencil.icon-white
                       |  Modifica
+                    | &nbsp;
                     if item.doc.enabled
-                      a.btn.btn-small.btn-danger.input-small(href='/courses/disable/#{item.doc._id}')
+                      a.btn.btn-danger.input-small(href='/courses/disable/#{item.doc._id}')
                         i.icon-ban-circle.icon-white
                         |  Disabilita
                     else
-                      a.btn.btn-small.btn-info.input-small(href='/courses/disable/#{item.doc._id}')
+                      a.btn.btn-info.input-small(href='/courses/disable/#{item.doc._id}')
                         i.icon-ok.icon-white
                         |  Abilita
       
