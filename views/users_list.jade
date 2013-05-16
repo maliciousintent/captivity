@@ -17,7 +17,7 @@ block content
     .span12
       if users.length > 0
 
-        form
+        form.live-checkbox
           .pull-left
             p
               small.table-head Iscrivi utenti selezionati al corso:
@@ -37,7 +37,7 @@ block content
               input.span3.search-query(type='text', placeholder='Filtra Nome o Società...')
 
           .clearfix
-            
+
           hr
         
           table.table.table-striped
@@ -52,7 +52,7 @@ block content
                 th.span3 &nbsp;
             tbody
               each item in users
-                tr.success
+                tr
                   td.text-center
                     input(type='checkbox')
                   td #{item.doc.name}

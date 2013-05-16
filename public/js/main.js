@@ -20,5 +20,25 @@ $(function () {
 
   /* Select Styler */
   $('.selectpicker').selectpicker();
-  
+
+  /* Live Checkbox */
+
+  $('form.live-checkbox th input[type="checkbox"]').on('click', function () {
+    var status = $(this).is(':checked') ? true : false;
+    if (status) {
+      $('form.live-checkbox td input[type="checkbox"]:visible:not(:checked)').trigger('click');
+    } else {
+      $('form.live-checkbox td input[type="checkbox"]:visible:checked').trigger('click');
+    }
+  });
+
+  $('form.live-checkbox td input[type="checkbox"]').on('click', function () {
+    var status = $(this).is(':checked') ? true : false;
+    if (status) {
+      $(this).closest('tr').addClass('success');
+    } else {
+      $(this).closest('tr').removeClass('success');
+    }
+  });
+
 });
