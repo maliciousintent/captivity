@@ -21,10 +21,9 @@ block content
           .pull-left
             p
               small.table-head Iscrivi utenti selezionati al corso:
-            select.input-large.selectpicker.show-menu-arrow(title='Scegli un corso')
-              option Corso primo con testo abbastanza lungo che magari trimmiamo
-              option Corso secondo
-              option Corso Caffè
+            select.input-large.selectpicker.show-menu-arrow(title='Scegli un corso...')
+              for item in courses
+                option(value=item.doc._id) #{item.doc.name}
             | &nbsp;
             button.btn.btn-success.btn-small(type='submit', name='enroll', value='Enroll')
               i.icon-white.icon-chevron-right 
@@ -54,7 +53,7 @@ block content
               each item in users
                 tr
                   td.text-center
-                    input(type='checkbox')
+                    input(type='checkbox', name='user[#{item.doc._id}]', value='enroll')
                   td #{item.doc.name}
                   td #{item.doc.company}
                   td.text-center
