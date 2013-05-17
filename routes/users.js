@@ -19,13 +19,24 @@ function usersList(req, res, next) {
   
   db.view('lms', 'users', { include_docs: true }, function (err, doc) {
     if (err) {
+      clog.error('Cannot get courses list:', err);
       return next(err);
     }
     
-    res.render('users_list', {
-      users: doc.rows
-    , moment: moment
+    db.view('lms', 'courses', { include_docs: true }, function (err, courses_doc) {
+      if (err) {
+        clog.error('Cannot get courses list:', err);
+        return next(err);
+      }
+      
+      res.render('users_list', {
+        users: doc.rows
+      , courses: courses_doc.rows
+      , moment: moment
+      });
+      
     });
+    
   });
 }
 
