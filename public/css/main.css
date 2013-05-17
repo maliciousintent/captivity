@@ -258,6 +258,8 @@ hr {
   box-shadow: 0 0 2px rgba(0,0,0,0.3);
   color: #333;
   outline: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: normal;
 }
 .main .bootstrap-select .btn-dropdown span.caret {
   opacity: 0.3;

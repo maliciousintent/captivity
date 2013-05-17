@@ -22,6 +22,16 @@ $(function () {
   $('.selectpicker').selectpicker();
 
   /* Live Checkbox */
+  var reloadCounter = function () {
+    var count = $('form.live-checkbox td input[type="checkbox"]:checked').size();
+    if (count === 0) {
+      $('#counter').html('Nessun utente selezionato');
+    } else if (count === 1) {
+      $('#counter').html('Iscrivi <b>' + count + ' utente</b> selezionato al corso:');
+    } else {
+      $('#counter').html('Iscrivi <b>' + count + ' utenti</b> selezionati al corso:');
+    }
+  };
 
   $('form.live-checkbox th input[type="checkbox"]').on('click', function () {
     var status = $(this).is(':checked') ? true : false;
@@ -30,6 +40,7 @@ $(function () {
     } else {
       $('form.live-checkbox td input[type="checkbox"]:visible:checked').trigger('click');
     }
+    reloadCounter();
   });
 
   $('form.live-checkbox td input[type="checkbox"]').on('click', function () {
@@ -40,6 +51,8 @@ $(function () {
       $('form.live-checkbox th input[type="checkbox"]').removeAttr('checked');
       $(this).closest('tr').removeClass('success');
     }
+    reloadCounter();
   });
+
 
 });

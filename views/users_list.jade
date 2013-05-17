@@ -20,7 +20,8 @@ block content
         form.live-checkbox
           .pull-left
             p
-              small.table-head Iscrivi utenti selezionati al corso:
+              small.table-head#counter
+                | Nessun utente selezionato
             select.input-large.selectpicker.show-menu-arrow(title='Scegli un corso...')
               for item in courses
                 option(value=item.doc._id) #{item.doc.name}
