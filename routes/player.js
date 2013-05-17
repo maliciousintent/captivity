@@ -31,7 +31,13 @@ function player(req, res, next) {
       return next(new Error('No course found at that URL.'));
     }
     
-    res.render('player', { scorm: body.rows[0].doc });
+    var course = body.rows[0].doc;
+    
+    if (course.enabled === false) {
+      return res.render('player_disabled', { scorm: course });
+    }
+    
+    res.render('player', { scorm: course });
   });
 }
 
