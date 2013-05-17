@@ -26,7 +26,8 @@ block content
           tbody
             each item in courses
               tr
-                td #{item.doc.name}
+                td
+                  a(href='/player/#{item.doc.url}', target='blank') #{item.doc.name}
                 td #{moment(item.doc.created_on).format('LLL')}
                 td
                   if item.doc.enabled

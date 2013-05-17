@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h1 Crea nuovo corso
+  h1 Dettagli corso
   p Inserisci i dati richiesti per creare un nuovo corso SCORM.
   
   form.form-horizontal(action='/courses', method='POST', enctype='multipart/form-data')
@@ -27,12 +27,15 @@ block content
           label Nome
         .controls
           input.input-block-level(type='text', name='name', value=pagina.name || '', required)
+          .help-block
+            .label.label-important Attenzione!
+            |  Assicurati che non ci siano utenti collegati prima di modificare il nome del corso.
 
       .control-group
         .control-label
           label Indirizzo (URL)
         .controls
-          input.input-block-level(type='text', value=pagina.url || '(automatico)', disabled)
+          input.input-block-level(type='text', value=pagina.url || '(automatico)', readonly)
 
       .control-group
         .control-label

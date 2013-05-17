@@ -86,7 +86,7 @@ function courseUpdate(req, res, next) {
     , created_on: new Date()
     , enabled: true
     , name: req.param('name')
-    , url: req.param('url')
+    , url: req.param('name').parameterize()
     , description: req.param('description')
     , max_attempts: req.param('max_attempts')
     , cover_image: req.param('cover_image')
@@ -96,10 +96,6 @@ function courseUpdate(req, res, next) {
     , _rev: req.param('_rev') || undefined
     }
     , errors = [];
-    
-  if (!data._id || !data.url) {
-    data.url = data.name.parameterize();
-  }
   
   async.series([
   
@@ -112,17 +108,28 @@ function courseUpdate(req, res, next) {
           }
           
           clog.debug('Extracting SCORM zipfile to', path);
-          fs.createReadStream(req.files.scorm.path).pipe(unzip.Extract({ path: path }));
-          _uploadToCloud(path, function (err, path) {
-            if (err) {
-              clog.error('Cannot cloud-upload', err);
-              return next(err);
-            }
-            
-            data.scorm = path;
-            clog.info('SCORM cloud upload completed to ' + path);
-            done();
+          
+          var unzipStream = unzip.Extract({ path: path });
+          
+          unzipStream.on('error', function (err) {
+            clog.error('Unzip extract error', err);
+            return next(err);
           });
+          
+          unzipStream.on('close', function () {
+            _uploadToCloud(path, function (err, path) {
+              if (err) {
+                clog.error('Cannot cloud-upload', err);
+                return next(err);
+              }
+              
+              data.scorm = path;
+              clog.info('SCORM cloud upload completed to ' + path);
+              done();
+            });
+          });
+          
+          fs.createReadStream(req.files.scorm.path).pipe(unzipStream);
         });
       } else {
         clog.debug('Nessuno SCORM zipfile caricato.');
@@ -151,7 +158,7 @@ function courseUpdate(req, res, next) {
   ], function (err) {
     if (err) {
       return next(err);
-    }
+    }    
   });
 }
 
