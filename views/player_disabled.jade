@@ -1,9 +1,11 @@
-html
-  body(style='font-family: Source Sans Pro, Sans-serif')
-  
-  div(style='text-align: center; width: 100%; margin-top: 200px;') 
+extends layout_user
+
+block content  
+  .player-disabled
     p
-      img(src='/img/captivity-logo.png')
+      img.mascotte(src='/img/captivity-sad.png')
       br
-      | Spiacente, il corso è stato sospeso.
+      | Spiacente.
+      br
+      small Il corso è stato sospeso.
   

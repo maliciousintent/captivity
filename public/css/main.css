@@ -1,46 +1,37 @@
-@import url("http://fonts.googleapis.com/css?family=Raleway:600");
+@import url("http://fonts.googleapis.com/css?family=Raleway:600,300");
 .raleway,
-html>.main>.container h1,
 body>.main>.container h1,
-html>.main>.container h2,
 body>.main>.container h2,
-html>.main>.container h3,
 body>.main>.container h3,
-html>.main>.container h4,
 body>.main>.container h4,
-html>.main>.container h5,
 body>.main>.container h5,
-html>.main>.container h6,
 body>.main>.container h6,
-html>.main>.container legend,
 body>.main>.container legend,
-html>.sidebar ul li a,
 body>.sidebar ul li a,
-.main .btn {
+.main .btn,
+body.user .player-disabled p {
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
   letter-spacing: 1px;
 }
 html,
 body {
-  background: url("../img/sidebar-background.png") left top repeat-y #f2f2f2;
   height: 100%;
   width: 100%;
 }
-html>.main,
+body {
+  background: url("../img/sidebar-background.png") left top repeat-y #f2f2f2;
+}
 body>.main {
   margin-left: 120px;
 }
-html>.main>.container,
 body>.main>.container {
   margin-left: 0;
 }
-html>.main>.container legend,
 body>.main>.container legend {
   letter-spacing: 0px;
   color: #999;
 }
-html>.sidebar,
 body>.sidebar {
   position: absolute;
   left: 0;
@@ -48,7 +39,6 @@ body>.sidebar {
   width: 100px;
   background: #181818;
 }
-html>.sidebar .logo,
 body>.sidebar .logo {
   display: block;
   text-align: center;
@@ -56,12 +46,10 @@ body>.sidebar .logo {
   width: 50px;
   height: 50px;
 }
-html>.sidebar .logo img,
 body>.sidebar .logo img {
   width: 50px;
   height: 50px;
 }
-html>.sidebar ul,
 body>.sidebar ul {
   border-top: 3px solid #0c0c0c;
   list-style: none;
@@ -69,11 +57,9 @@ body>.sidebar ul {
   padding: 0;
   padding-top: 20px;
 }
-html>.sidebar ul li,
 body>.sidebar ul li {
   display: block;
 }
-html>.sidebar ul li a,
 body>.sidebar ul li a {
   display: block;
   padding: 10px 20px;
@@ -88,35 +74,26 @@ body>.sidebar ul li a {
   transition: all 0.2s ease;
   text-decoration: none;
 }
-html>.sidebar ul li a:hover,
 body>.sidebar ul li a:hover,
-html>.sidebar ul li a:active,
 body>.sidebar ul li a:active,
-html>.sidebar ul li a.active,
 body>.sidebar ul li a.active {
   text-decoration: none;
   color: #28b5e5;
   outline: none;
 }
-html>.sidebar ul li a:visited,
 body>.sidebar ul li a:visited,
-html>.sidebar ul li a:link,
 body>.sidebar ul li a:link {
   outline: none;
 }
-html>.sidebar ul li a:active,
 body>.sidebar ul li a:active,
-html>.sidebar ul li a.active,
 body>.sidebar ul li a.active {
   background: #0c0c0c;
 }
-html>.sidebar ul li.last,
 body>.sidebar ul li.last {
   margin-top: 20px;
   padding-top: 20px;
   border-top: 3px solid #0c0c0c;
 }
-html>.sidebar ul li.last a,
 body>.sidebar ul li.last a {
   opacity: 0.7;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
@@ -370,4 +347,49 @@ hr {
 .main form .search-query {
   padding-left: 12px;
   padding-right: 12px;
+}
+body.user {
+  padding-top: 60px;
+  background: url("../img/captivity-pattern-big.png") center center no-repeat #f2f2f2;
+  height: auto;
+}
+body.user .navbar .navbar-inner {
+  background: #fff;
+  border: none;
+  -webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 5px 0;
+}
+body.user .navbar .navbar-inner a.logo {
+  margin-left: 10px;
+}
+body.user .navbar .navbar-inner a.logo img {
+  height: 40px;
+  width: 40px;
+}
+body.user .navbar .navbar-inner ul.nav li a {
+  font-weight: normal;
+  text-shadow: 0 0 5px #fff;
+}
+body.user .player-disabled {
+  height: 170px;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -85px;
+  margin-left: -150px;
+}
+body.user .player-disabled p {
+  text-align: center;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0;
+}
+body.user .player-disabled .mascotte {
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  margin-bottom: 10px;
 }
