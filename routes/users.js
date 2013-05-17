@@ -9,7 +9,8 @@ var db = require('nano')(process.env.DATABASE_URL)
   , clog = require('clog')
   , tmp = require('tmp')
   , unzip = require('unzip')
-  , uuid = require('node-uuid');
+  , uuid = require('node-uuid')
+  , bcrypt = require('bcrypt');
 
 require('sugar');
 moment.lang('it');
@@ -111,7 +112,7 @@ function userUpdate(req, res, next) {
       data.username = req.param('username');
       
       if (req.param('password') !== '') {
-        data.password = req.param('password');
+        data.password = bcrypt.hashSync(req.param('password'), bcrypt.genSaltSync(12));
       }
       
       db.insert(data, data._id, function (err, body) {
