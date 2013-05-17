@@ -1,8 +1,12 @@
 extends layout
 
 block content
-  h3 Gestione utenti
-  
+  .spacer
+  .row
+    .span12
+      h3 Gestione utenti
+  hr
+    
   form.form-horizontal(action='/users/disable', method='POST')
     input(type='hidden', name='_method', value='PUT')
     input(type='hidden', name='_id', value='#{doc._id || ""}')
