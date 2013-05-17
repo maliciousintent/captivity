@@ -254,8 +254,8 @@ hr {
 .main .bootstrap-select .btn-dropdown {
   background-color: #fff;
   border-color: #fff;
-  -webkit-box-shadow: 0 0 2px rgba(0,0,0,0.3);
-  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
   color: #333;
   outline: none;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
