@@ -1,0 +1,62 @@
+extends layout
+
+block content
+  h3 Gestione utenti
+  
+  form.form-horizontal(action='/users/disable', method='POST')
+    input(type='hidden', name='_method', value='PUT')
+    input(type='hidden', name='_id', value='#{doc._id || ""}')
+    
+    if message.length
+      .alert #{message}
+    
+    if doc.enabled
+      input(type='hidden', name='enabled', value='no')
+      
+      fieldset
+        legend Disabilitazione utente #{doc.name}
+      
+        .alert.alert-block.alert-danger
+          h4 Attenzione!
+          p
+            | Stai per disabilitare l'utente #{doc.name}, per favore nota che:
+            ul
+              li 
+                | #{doc.name} 
+                strong non potrà più accedere 
+                | a questa piattaforma finché non sarà riattivato
+              li 
+                | #{doc.name} 
+                strong non sarà disconnesso 
+                | dalla sessione attuale e potrà continuare ad utilizzare questa piattaforma finché non chiuderà il Browser
+              li Nessun dato sarà eliminato e potrai riabilitare questo utente in qualsiasi momento
+              li La password di #{doc.name} non sarà modificata
+        
+        p Per proseguire clicca il bottone qui sotto.
+
+      .form-actions
+        button.btn.btn-danger.btn-large.pull-right(type='submit')
+         i.icon-white.icon-ban-circle
+         |  Disabilita utente      
+      
+    else
+      input(type='hidden', name='enabled', value='yes')
+    
+      fieldset
+        legend Abilitazione utente #{doc.name}
+      
+        .alert.alert-block.alert-info
+          h4 Attenzione!
+          p
+            | Stai per abilitare il utente #{doc.name}.
+        
+
+      .form-actions
+        button.btn.btn-success.btn-large.pull-right(type='submit')
+         i.icon-white.icon-ok
+         |  Abilita utente
+      
+
+block scripts
+  script(src='/js/ckeditor/ckeditor.js')
+

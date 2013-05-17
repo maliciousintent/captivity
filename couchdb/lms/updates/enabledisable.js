@@ -3,7 +3,7 @@
 function(doc, req) {
   var body = JSON.parse(req.body);
   
-  if (!doc || doc.type !== 'course') {
+  if (!doc || (doc.type !== 'course' && doc.type !== 'user')) {
     return [null, 'Cannot update this document (design).'];
   }
   

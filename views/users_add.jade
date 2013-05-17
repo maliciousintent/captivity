@@ -1,0 +1,84 @@
+extends layout
+
+block content
+  h1 Dettagli utente
+  p Inserisci i dati richiesti per creare un nuovo utente.
+  
+  form.form-horizontal(action='/users', method='POST', enctype='multipart/form-data')
+    input(type='hidden', name='_id', value='#{pagina._id || ""}')
+    input(type='hidden', name='_rev', value='#{pagina._rev || ""}')
+    
+    if message.length
+      .alert.alert-success.alert-block
+        p #{message}
+    
+    if errors.length > 0
+      .alert.alert-danger.alert-block
+        p #{message}
+    
+    fieldset
+      legend Dati utente
+    
+      .control-group
+        .control-label
+          label
+            strong Nome e Cognome
+        .controls
+          input.input-large(type='text', name='name', value=pagina.name || '', required)
+
+      .control-group
+        .control-label
+          label
+            strong E-mail
+        .controls
+          input.input-large(type='email', name='email', value=pagina.email || '', required)
+
+      .control-group
+        .control-label
+          label Azienda
+        .controls
+          input.input-large(type='text', name='company', value=pagina.company || '')
+
+      .control-group
+        .control-label
+          label Descrizione
+        .controls
+          input.input-block-level(type='text', name='description', value=pagina.description || '')
+
+      .control-group
+        .control-label
+          label Lingua
+        .controls
+          select.input-large(name='language')
+            option(value='it', selected=pagina.lingua=='it') Italiano
+            option(value='en', selected=pagina.lingua=='en') Inglese
+            option(value='de', selected=pagina.lingua=='de') Tedesco
+            
+    fieldset
+      legend Dati di Login
+      
+      .control-group
+        .control-label
+          label
+            strong Username
+        .controls
+          input.input-large(type='text', name='username', value=pagina.username || '', placeholder='es: nome.cognome', required)
+
+      .control-group
+        .control-label
+          label
+            strong Password
+        .controls
+          input.input-large(type='text', name='password', required, pattern="([a-z]|[A-Z]|[0-9]){8,}", placeholder='min. 8 caratteri')
+          .help-block
+            p
+              span.label.label-warning Attenzione
+              |  devi reinserire la password per poter salvare le modifiche.
+            
+
+
+    .form-actions
+      button.btn.btn-success.btn-large(type='submit')
+       i.icon-white.icon-ok
+       |  Salva utente
+      

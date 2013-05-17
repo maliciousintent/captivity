@@ -1,0 +1,57 @@
+extends layout
+
+block content
+  .spacer
+  .row
+    .span8
+      h3 Utenti
+      
+    .span4
+      .spacer
+      a.btn.pull-right.btn-success(href='/users/form')
+        i.icon-white.icon-plus
+        |  Crea nuovo utente
+  hr
+
+  .row
+    .span12
+      if users.length > 0
+      
+        table.table.table-striped
+          thead
+            tr
+              th.span1 Stato
+              th.span3 Nome e cognome
+              th.span2 Società
+              th.span3 Data creazione
+              th.span3 &nbsp;
+          tbody
+            each item in users
+              tr
+                td
+                  if item.doc.enabled
+                    img.image-icon(src='/img/icon-status-ok.png', title='Utente attivo')
+                  else
+                    img.image-icon(src='/img/icon-status-error.png', title='Utente disabilitato')
+                td #{item.doc.name}
+                td #{item.doc.company}
+                td #{moment(item.doc.created_on).format('LLL')}
+                td.actions
+                  if item.doc.enabled
+                    a.btn.btn-small.btn-danger(href='/users/disable/#{item.doc._id}')
+                      i.icon-ban-circle.icon-white
+                      |  Disabilita
+                  else
+                    a.btn.btn-small.btn-info(href='/users/disable/#{item.doc._id}')
+                      i.icon-ok.icon-white
+                      |  Abilita
+                  | &nbsp;
+                  a.btn.btn-small(href='/users/form/#{item.doc._id}')
+                    i.icon-pencil.icon-white
+                    |  Modifica
+      
+      
+      else
+        
+        p.alert.alert-info Non è stato inserito ancora alcun utente.
+
