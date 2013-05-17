@@ -376,6 +376,30 @@ body.user .navbar .navbar-inner a.logo img {
 body.user .navbar .navbar-inner ul.nav li a {
   font-weight: normal;
   text-shadow: 0 0 5px #fff;
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -o-transition: all 0.1s ease;
+  -ms-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+}
+body.user .navbar .navbar-inner ul.nav li a i {
+  opacity: 0.5;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  filter: alpha(opacity=50);
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -o-transition: all 0.1s ease;
+  -ms-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+}
+body.user .navbar .navbar-inner ul.nav li:hover a i {
+  opacity: 0.8;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  filter: alpha(opacity=80);
+}
+body.user .navbar .navbar-inner ul.nav li.spacer {
+  line-height: 40px;
+  color: #ccc;
 }
 body.user .player-disabled {
   height: 170px;
