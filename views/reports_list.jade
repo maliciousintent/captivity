@@ -34,7 +34,7 @@ block content
               if users[report.user_id] && users[report.user_id] && report.events && report.events.length > 0
                 tr
                   td 
-                    a(href='/courses/form/#{report.user_id}') #{users[report.user_id][0].name}
+                    a(href='/users/form/#{report.user_id}') #{users[report.user_id][0].name}
                   td 
                     a(href='/courses/form/#{report.course_id}') #{courses[report.course_id][0].name}
                   td.text-center.avoid-search

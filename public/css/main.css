@@ -123,6 +123,7 @@ body>.sidebar ul li.last a {
   filter: alpha(opacity=70);
 }
 .spacer {
+  display: block;
   height: 10px;
 }
 hr {

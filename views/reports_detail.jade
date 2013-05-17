@@ -8,26 +8,35 @@ block content
       
   hr
 
+  .row.profile
+    .span12      
+      
+      p
+        small
+          b Dati Utente 
+          | &nbsp;&raquo;&nbsp;&nbsp;
+        span 
+          a(href='mailto:#{user.email}', title='Contatta #{user.name} (#{user.email})') #{user.name}
+          | , #{user.company} 
+          | (username: #{user.username})
+
+      p
+        small
+          b Dati Corso  
+          | &nbsp;&nbsp;&raquo;&nbsp;&nbsp;
+        span 
+          | #{course.name} 
+          em creato il #{moment(course.created_on).format('LLL')}
+
+  .spacer
   .row
     .span12
-      
-      p Di seguito trovi i dettagli del tracciamento di #{user.name} per il corso #{course.name}.
+      p.alert.alert-info Di seguito trovi i dettagli del tracciamento di #{user.name} per il corso #{course.name}.
         | Le azioni sono visualizzate in ordine cronologico dalla più recente (in alto) alla prima eseguita (in fondo).
-        br
+        span.spacer
         |  Sono tracciate le seguenti tipologie di evento: 
         b iscrizione (enrollment), iniziato, sospeso, abbandonato, completato
         | . Per alcune tipolgie di tracciamento sono previsti dettagli aggiuntivi.
-      
-      p
-        b Dati Utente: 
-        span 
-          a(href='mailto:#{user.email}') #{user.name}
-          | , #{user.company} 
-          | (username: #{user.username})
-          
-        br
-        b Dati Corso: 
-        span #{course.name} creato il #{moment(course.created_on).format('LLL')}
 
   hr
 
@@ -40,9 +49,9 @@ block content
         table.table.table-striped#user-table
           thead
             tr
-              th.span3 Data
-              th.span3 Descrizione
-              th.span6 Dettagli
+              th(style='width: 180px;') Data
+              th(style='width: auto;') Descrizione
+              th(style='width: auto;') Dettagli
           tbody
             
           for event in report.events
