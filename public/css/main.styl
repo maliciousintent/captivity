@@ -196,6 +196,46 @@ hr
         td
           border-bottom 2px solid #E2E2E2
 
+  .bootstrap-select
+    .filter-option
+      width 175px
+      text-align left
+    .btn-dropdown
+      background-color #FFF
+      border-color #FFF
+      box-shadow 0 0 2px rgba(#000,0.3)
+      color #333
+      outline none
+      span.caret
+        opacity 0.3
+      &:hover
+        background #FFF
+    &.open
+      .btn
+        background #FFF
+        box-shadow 0 0 5px rgba(_accent,0.7)
+        outline none
+        &:hover
+          background #FFF
+    ul.dropdown-menu
+      border none
+      border-radius 3px
+      box-shadow 0 0 5px rgba(#000, 0.3)
+      margin-top 5px
+      li
+        a
+          color #333
+          cursor pointer
+          padding-left 10px
+        &:hover
+          a
+            background _accent
+            color #FFF
+        &:last-child
+          a
+            border none
+
+
   form
     fieldset
       padding-bottom 10px

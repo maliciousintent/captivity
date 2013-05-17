@@ -19,20 +19,26 @@ block content
 
         form
           .pull-left
-            span Iscrivi selezionati al corso
-            select.input-large
-              option Corso 1
-              option Corso 2
-              option Corso 3
+            p
+              small.table-head Iscrivi utenti selezionati al corso:
+            select.input-large.selectpicker.show-menu-arrow(title='Scegli un corso')
+              option Corso primo con testo abbastanza lungo che magari trimmiamo
+              option Corso secondo
+              option Corso Caffè
+            | &nbsp;
             button.btn.btn-success.btn-small(type='submit', name='enroll', value='Enroll')
               i.icon-white.icon-chevron-right 
               |  Iscrivi
 
           .pull-right
+            p
+              small.table-head &nbsp;
             div.input-append
-              input.span3.search-query(type='text', placeholder='Filtra Nome o Società')
+              input.span3.search-query(type='text', placeholder='Filtra Nome o Società...')
 
           .clearfix
+            
+          hr
         
           table.table.table-striped
             thead

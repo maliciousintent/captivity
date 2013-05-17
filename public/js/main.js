@@ -12,7 +12,13 @@
  */
 
 $(function () {
+
+  /* Sidebar Active Class */
   var hash = window.location.pathname.split('/');
   $('.sidebar ul li a.active').removeClass('active');
   $('.sidebar ul li a[href="/' + hash[1] + '"]').addClass('active');
+
+  /* Select Styler */
+  $('.selectpicker').selectpicker();
+  
 });
