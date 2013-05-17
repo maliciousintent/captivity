@@ -5,27 +5,26 @@ html
     link(rel='stylesheet', href='/css/bootstrap.css')
     link(rel='stylesheet', href='/css/main.css')
     meta(http-equiv='content-type', content='text/html; charset=iso-8859-1')
+    link(rel='shortcut icon', href='img/favicon.ico')
         
   body
-    .navbar.navbar-inverse.navbar-fixed-top
-      .navbar-inner
-        .container
-          a.brand(href='/') Captivity
-          
-          .nav-collapse.collapse
-            ul.nav
-              li
-                a(href='/courses') Corsi
-              li
-                a(href='/users') Utenti
-              li
-                a(href='/reports') Report
-                
-              li.pull-right
-                a(href='/logout') Logout
+    .sidebar
+      a.logo(href='/')
+        img(src='img/captivity-logo.png')
+      
+      ul
+        li
+          a(href='/courses') Corsi
+        li
+          a(href='/users') Utenti
+        li
+          a(href='/reports') Report
+        li.last
+          a(href='/logout') Logout
     
-    .container
-        block content
+    .main
+      .container
+          block content
     
     
     script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js')    
