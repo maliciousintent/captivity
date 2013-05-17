@@ -73,11 +73,11 @@ block content
           label
             strong Password
         .controls
-          input.input-large(type='text', name='password', required, pattern="([a-z]|[A-Z]|[0-9]){8,}", placeholder='min. 8 caratteri')
+          input.input-large(type='text', name='password', placeholder='min. 8 caratteri')
           .help-block
             p
               span.label.label-warning Attenzione
-              |  devi reinserire la password per poter salvare le modifiche.
+              |  gli utenti senza password non possono effettuare il login.
             
     hr
 
