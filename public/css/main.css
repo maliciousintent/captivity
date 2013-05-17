@@ -12,6 +12,8 @@ html>.main>.container h5,
 body>.main>.container h5,
 html>.main>.container h6,
 body>.main>.container h6,
+html>.main>.container legend,
+body>.main>.container legend,
 html>.sidebar ul li a,
 body>.sidebar ul li a,
 .main .btn {
@@ -32,6 +34,11 @@ body>.main {
 html>.main>.container,
 body>.main>.container {
   margin-left: 0;
+}
+html>.main>.container legend,
+body>.main>.container legend {
+  letter-spacing: 0px;
+  color: #999;
 }
 html>.sidebar,
 body>.sidebar {
@@ -123,6 +130,20 @@ hr {
   height: 3px;
   background: #e2e2e2;
 }
+.main a:not(.btn) {
+  color: #6b6b6b;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.main a:not(.btn):hover {
+  color: #28b5e5;
+  border-bottom-color: rgba(40,181,229,0.5);
+}
 .main .btn {
   background-image: none;
   -webkit-box-shadow: none;
@@ -139,6 +160,15 @@ hr {
   color: #fff;
   background: #999;
   border: 2px solid #999;
+}
+.main .btn>i {
+  margin-right: 3px;
+}
+.main .btn.btn-large {
+  font-size: 14px;
+}
+.main .btn.btn-large i {
+  margin-top: 0;
 }
 .main .btn:hover {
   background: #a8a8a8;
@@ -174,6 +204,21 @@ hr {
 .main .btn.btn-success:hover {
   background: #74c274;
 }
+.main .label {
+  background: none;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  text-shadow: none;
+  font-weight: 600;
+  color: #28b5e5;
+}
+.main .label.label-important {
+  color: #da4f49;
+}
+.main .alert {
+  border-width: 2px;
+}
 .main table.table tr th {
   font-size: 13px;
 }
@@ -194,4 +239,37 @@ hr {
 }
 .main table.table tr:last-child td {
   border-bottom: 2px solid #e2e2e2;
+}
+.main form fieldset {
+  padding-bottom: 10px;
+}
+.main form fieldset .control-group {
+  margin-bottom: 20px;
+}
+.main form label {
+  font-weight: bold;
+  color: #666;
+}
+.main form .cke {
+  border: 1px solid #ccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.main form .cke .cke_inner {
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.main form .cke .cke_top {
+  -webkit-border-top-left-radius: 3px;
+  border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.main form .cke iframe {
+  -webkit-border-bottom-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }

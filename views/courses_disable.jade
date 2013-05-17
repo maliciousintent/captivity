@@ -1,7 +1,11 @@
 extends layout
 
 block content
-  h3 Gestione corso
+  .spacer
+  .row
+    .span12
+      h3 Gestione corso
+  hr
   
   form.form-horizontal(action='/courses/disable', method='POST')
     input(type='hidden', name='_method', value='PUT')
@@ -27,11 +31,13 @@ block content
         
         p Per proseguire clicca il bottone qui sotto.
 
-      .form-actions
-        button.btn.btn-danger.btn-large.pull-right(type='submit')
-         i.icon-white.icon-ban-circle
-         |  Disabilita corso      
+      hr
+
+      button.btn.btn-danger.btn-large.pull-right(type='submit')
+        i.icon-white.icon-ban-circle
+        |  Disabilita corso  
       
+      .clearfix
     else
       input(type='hidden', name='enabled', value='yes')
     
@@ -44,11 +50,15 @@ block content
             | Stai per abilitare il corso #{doc.name}, esso comparirà nuovamente nell'elenco corsi degli utenti iscritti.
         
 
-      .form-actions
-        button.btn.btn-success.btn-large.pull-right(type='submit')
-         i.icon-white.icon-ok
-         |  Abilita corso
+      hr
+
+      button.btn.btn-success.btn-large.pull-right(type='submit')
+        i.icon-white.icon-ok
+        |  Abilita corso
       
+      .clearfix
+
+  .spacer
 
 block scripts
   script(src='/js/ckeditor/ckeditor.js')

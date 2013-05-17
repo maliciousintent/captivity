@@ -23,6 +23,10 @@ body
 
       h1, h2, h3, h4, h5, h6
         @extends .raleway
+      legend
+        @extends .raleway
+        letter-spacing 0px
+        color #999
 
 
   &>.sidebar
@@ -88,6 +92,16 @@ hr
   background #E2E2E2
 
 .main
+
+  a:not(.btn)
+    color darken(#999, 30%)
+    text-decoration none
+    border-bottom 1px solid rgba(#000, 0.1)
+    transition all 0.2s ease
+    &:hover
+      color _accent
+      border-bottom-color rgba(_accent, 0.5)
+      
   .btn
     background-image none
     box-shadow none
@@ -99,6 +113,14 @@ hr
     font-size 13px
 
     transition all 0.2s ease
+
+    &>i
+      margin-right 3px
+
+    &.btn-large
+      font-size 14px
+      i
+        margin-top 0
 
     _btncolor = #999
     color #FFF
@@ -134,6 +156,19 @@ hr
       &:hover
         background lighten(_btncolor, 15%)
 
+  .label
+    background none
+    border none
+    box-shadow none
+    text-shadow none
+    font-weight 600
+    color _accent
+
+    &.label-important
+      color #da4f49
+
+  .alert
+    border-width 2px
 
   table.table
     tr
@@ -154,3 +189,24 @@ hr
       &:last-child
         td
           border-bottom 2px solid #E2E2E2
+
+  form
+    fieldset
+      padding-bottom 10px
+      .control-group
+        margin-bottom 20px
+
+    label
+      font-weight bold
+      color #666
+
+    .cke
+      border 1px solid #cccccc
+      box-shadow inset 0 1px 1px rgba(0, 0, 0, 0.075)
+      border-radius 3px
+      .cke_inner 
+        border-radius 3px
+      .cke_top 
+        border-radius top 3px
+      iframe
+        border-radius bottom 3px
