@@ -242,10 +242,16 @@ hr
           color #333
           cursor pointer
           padding-left 10px
-        &:hover
+        &:hover,
+        &:active,
+        &:focus,
+        &:link
           a
             background _accent
             color #FFF
+        &:active
+          a
+            background lighten(_accent, 15%)
         &:last-child
           a
             border none

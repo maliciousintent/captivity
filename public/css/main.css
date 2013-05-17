@@ -309,9 +309,15 @@ hr {
   cursor: pointer;
   padding-left: 10px;
 }
-.main .bootstrap-select ul.dropdown-menu li:hover a {
+.main .bootstrap-select ul.dropdown-menu li:hover a,
+.main .bootstrap-select ul.dropdown-menu li:active a,
+.main .bootstrap-select ul.dropdown-menu li:focus a,
+.main .bootstrap-select ul.dropdown-menu li:link a {
   background: #28b5e5;
   color: #fff;
+}
+.main .bootstrap-select ul.dropdown-menu li:active a {
+  background: #48c0e9;
 }
 .main .bootstrap-select ul.dropdown-menu li:last-child a {
   border: none;
