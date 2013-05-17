@@ -37,6 +37,7 @@ $(function () {
     if (status) {
       $(this).closest('tr').addClass('success');
     } else {
+      $('form.live-checkbox th input[type="checkbox"]').removeAttr('checked');
       $(this).closest('tr').removeClass('success');
     }
   });
