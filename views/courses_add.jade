@@ -80,8 +80,11 @@ block content
         .control-label
           label File indice
         .controls
-          input(type='text', name='scorm_index', value=pagina.scorm_index || 'index.html')
-          .help-block Indica la pagina HTML da cui iniziare il corso
+          input.input-xlarge(type='text', name='scorm_index', value=pagina.scorm_index || 'index.html')
+          .help-block
+            | Indica il percorso della pagina HTML da cui iniziare il corso. 
+            | Se l'archivio .zip contiene una cartella top-level devi indicare anche il suo nome.
+            | (Ma non nominare MIA MADRE!)
       
 
     .form-actions
