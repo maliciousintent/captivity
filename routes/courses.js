@@ -6,10 +6,28 @@ var db = require('nano')(process.env.DATABASE_URL)
   , async = require('async')
   , sugar = require('sugar')
   , moment = require('moment')
-  , clog = require('clog');
+  , clog = require('clog')
+  , tmp = require('tmp')
+  , unzip = require('unzip')
+  , uuid = require('node-uuid')
+  , fs = require('fs');
 
 require('sugar');
 moment.lang('it');
+
+if (!fs.existsSync('temp')) {
+  fs.mkdirSync('temp');
+}
+
+function _uploadToCloud(path, callback) {
+  // should recursively upload "path" to a cloud storage
+  // when done callback gets called with the cloud base path
+  var id = uuid.v4();
+  
+  clog.info('Uploading {0} to the cloud, id {1}'.format(path, id));
+  callback(process.cwd() + '/temp/' + id);
+}
+
 
 function coursesList(req, res, next) {
   
@@ -22,10 +40,8 @@ function coursesList(req, res, next) {
       courses: doc.rows
     , moment: moment
     });
-  });
-  
+  }); 
 }
-
 
 
 function coursesForm(req, res, next) {
@@ -68,7 +84,7 @@ function courseUpdate(req, res, next) {
     , description: req.param('description')
     , max_attempts: req.param('max_attempts')
     , cover_image: req.param('cover_image')
-    , scorm: req.param('scorm')
+    , scorm: null
     , scorm_index: req.param('scorm_index')
     , _id: req.param('_id') || undefined
     , _rev: req.param('_rev') || undefined
@@ -78,12 +94,43 @@ function courseUpdate(req, res, next) {
     data.url = data.name.parameterize();
   }
   
-  db.insert(data, data._id, function (err, body) {
+  async.series([
+  
+    function uploadScormPackage(done) {
+      if (req.files.scorm) {
+        tmp.dir(function _tempDirCreated(err, path) {
+          if (err) {
+            clog.error('Error creating temp dir.');
+            return next(err);
+          }
+          
+          clog.info('Extracting SCORM zipfile to ', path);
+          fs.createReadStream(req.files.scorm.path).pipe(unzip.Extract({ path: path }));
+          _uploadToCloud(path, function (path) {
+            data.scorm = path;
+            done();
+          });
+        });
+      } else {
+        done();
+      }
+    },
+  
+    function saveCourse(done) {
+      db.insert(data, data._id, function (err, body) {
+        if (err) {
+          return next(err);
+        }
+        
+        res.redirect('/courses/form/' + body.id);
+        done();
+      });
+    }
+    
+  ], function (err) {
     if (err) {
       return next(err);
     }
-    
-    res.redirect('/courses/form/' + body.id);
   });
 }
 

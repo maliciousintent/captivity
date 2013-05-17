@@ -18,14 +18,22 @@ block content
         table.table.table-striped
           thead
             tr
-              th Nome corso
-              th Data creazione
-              th &nbsp;
+              th.span5 Nome corso
+              th.span3 Data creazione
+              th.span1 Stato
+              th.span3 &nbsp;
           tbody
             each item in courses
               tr
                 td #{item.doc.name}
                 td #{moment(item.doc.created_on).format('LLL')}
+                td
+                  if item.doc.enabled
+                    a(title='Corso attivo')
+                      i.icon-ok
+                  else
+                    a(title='Corso disabilitato')
+                      i.icon-remove
                 td
                   .btn-group.pull-right
                     a.btn.btn-small.input-small(href='/courses/form/#{item.doc._id}')
