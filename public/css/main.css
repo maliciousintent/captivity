@@ -216,6 +216,9 @@ hr {
 .main .label.label-important {
   color: #da4f49;
 }
+.main .label.label-warning {
+  color: #f89406;
+}
 .main .alert {
   border-width: 2px;
 }
