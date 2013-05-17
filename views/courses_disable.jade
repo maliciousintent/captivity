@@ -17,12 +17,15 @@ block content
         legend Disabilitazione corso #{doc.name}
       
         .alert.alert-block.alert-danger
-          strong Attenzione!
+          h4 Attenzione!
           p
-            | Stai per disabilitare il corso (#{doc.name}), assicurati che non ci siano utenti connessi.
-            br
-            | Nessun dato sarà eliminato e potrai riabilitarlo in qualsiasi momento.
+            | Stai per disabilitare il corso #{doc.name}, per favore nota che:
+            ul
+              li #{doc.name} non comparirà più nella lista dei corsi degli utenti iscritti
+              li Tutti gli utenti che stanno visualizzando il corso #{doc.name} in questo momento potranno completarlo senza interruzioni
+              li Nessun dato sarà eliminato e potrai riabilitare questo corso in qualsiasi momento
         
+        p Per proseguire clicca il bottone qui sotto.
 
       .form-actions
         button.btn.btn-danger.btn-large.pull-right(type='submit')
@@ -36,9 +39,9 @@ block content
         legend Abilitazione corso #{doc.name}
       
         .alert.alert-block.alert-info
-          strong Attenzione!
+          h4 Attenzione!
           p
-            | Stai per abilitare il corso (#{doc.name}), tutti gli utenti iscritti potranno fruirlo.
+            | Stai per abilitare il corso #{doc.name}, esso comparirà nuovamente nell'elenco corsi degli utenti iscritti.
         
 
       .form-actions

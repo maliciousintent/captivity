@@ -9,9 +9,15 @@ block content
     input(type='hidden', name='_rev', value='#{pagina._rev || ""}')
     
     if message.length
-      .alert #{message}
+      .alert.alert-success.alert-block
+        p #{message}
     
-    
+    if errors.length > 0
+      .alert.alert-danger.alert-block
+        h4 Siamo spiacenti, si sono verificati i seguenti errori durante l'elaborazione della richiesta:
+        ul
+          for e in errors
+            li #{e}
     
     fieldset
       legend Dati corso
@@ -26,8 +32,7 @@ block content
         .control-label
           label Indirizzo (URL)
         .controls
-          input.input-block-level(type='text', value=pagina.url || '(automatico)', readonly)
-
+          input.input-block-level(type='text', value=pagina.url || '(automatico)', disabled)
 
       .control-group
         .control-label
@@ -59,6 +64,14 @@ block content
         .controls
           input(type='file', name='scorm')
           .help-block Seleziona un pacchetto SCORM (.zip da caricare)
+          
+
+      .control-group
+        .control-label
+          label Scorm URI
+        .controls
+          input(type='hidden', name='scorm_uri', value=pagina.scorm || '', readonly)
+          input.input-block-level(type='text', value=pagina.scorm || 'Nessun pacchetto SCORM caricato', disabled)
           
       .control-group
         .control-label
