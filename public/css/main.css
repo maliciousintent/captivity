@@ -349,9 +349,15 @@ hr {
   padding-right: 12px;
 }
 body.user {
-  padding-top: 60px;
+  padding-top: 80px;
   background: url("../img/captivity-pattern-big.png") center center no-repeat #f2f2f2;
   height: auto;
+}
+body.user>.main {
+  margin-left: 0;
+}
+body.user>.main>.container {
+  margin: auto;
 }
 body.user .navbar .navbar-inner {
   background: #fff;
@@ -392,4 +398,9 @@ body.user .player-disabled .mascotte {
   height: 70px;
   margin: auto;
   margin-bottom: 10px;
+}
+body.user .player-container {
+  width: 800px;
+  height: 600px;
+  margin: auto;
 }
