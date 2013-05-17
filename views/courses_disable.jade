@@ -1,0 +1,52 @@
+extends layout
+
+block content
+  h1 Gestione corso
+  
+  form.form-horizontal(action='/courses/disable', method='POST')
+    input(type='hidden', name='_method', value='PUT')
+    input(type='hidden', name='_id', value='#{doc._id || ""}')
+    
+    if message.length
+      .alert #{message}
+    
+    if doc.enabled
+      input(type='hidden', name='enabled', value='no')
+      
+      fieldset
+        legend Disabilitazione corso #{doc.name}
+      
+        .alert.alert-block.alert-danger
+          strong Attenzione!
+          p
+            | Stai per disabilitare il corso (#{doc.name}), assicurati che non ci siano utenti connessi.
+            br
+            | Nessun dato sarà eliminato e potrai riabilitarlo in qualsiasi momento.
+        
+
+      .form-actions
+        button.btn.btn-danger.btn-large.pull-right(type='submit')
+         i.icon-white.icon-ban-circle
+         |  Disabilita corso      
+      
+    else
+      input(type='hidden', name='enabled', value='yes')
+    
+      fieldset
+        legend Abilitazione corso #{doc.name}
+      
+        .alert.alert-block.alert-info
+          strong Attenzione!
+          p
+            | Stai per abilitare il corso (#{doc.name}), tutti gli utenti iscritti potranno fruirlo.
+        
+
+      .form-actions
+        button.btn.btn-success.btn-large.pull-right(type='submit')
+         i.icon-white.icon-ok
+         |  Abilita corso
+      
+
+block scripts
+  script(src='/js/ckeditor/ckeditor.js')
+

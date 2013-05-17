@@ -1,0 +1,79 @@
+extends layout
+
+block content
+  h1 Crea nuovo corso
+  p Inserisci i dati richiesti per creare un nuovo corso SCORM.
+  
+  form.form-horizontal(action='/courses', method='POST', enctype='multipart/form-data')
+    input(type='hidden', name='_id', value='#{pagina._id || ""}')
+    input(type='hidden', name='_rev', value='#{pagina._rev || ""}')
+    
+    if message.length
+      .alert #{message}
+    
+    
+    
+    fieldset
+      legend Dati corso
+    
+      .control-group
+        .control-label
+          label Nome
+        .controls
+          input.input-block-level(type='text', name='name', value=pagina.name || '', required)
+
+      .control-group
+        .control-label
+          label Indirizzo (URL)
+        .controls
+          input.input-block-level(type='text', value=pagina.url || '(automatico)', readonly)
+
+
+      .control-group
+        .control-label
+          label Descrizione
+        .controls
+          textarea.ckeditor(type='text', name='description')
+            | #{pagina.description || ''}
+          
+      .control-group
+        .control-label
+          label Numero di tentativi
+        .controls
+          input.input-small(type='number', name='max_attempts', value=pagina.max_attempts || 0)
+          .help-block Numero di tentativi permessi, 0 = illimitati
+          
+      .control-group
+        .control-label
+          label Copertina
+        .controls
+          input(type='file', name='cover_image')
+      
+          
+    fieldset
+      legend Pacchetto SCORM
+      
+      .control-group
+        .control-label
+          label SCORM
+        .controls
+          input(type='file', name='scorm')
+          .help-block Seleziona un pacchetto SCORM (.zip da caricare)
+          
+      .control-group
+        .control-label
+          label File indice
+        .controls
+          input(type='text', name='scorm_index', value=pagina.scorm_index || 'index.html')
+          .help-block Indica la pagina HTML da cui iniziare il corso
+      
+
+    .form-actions
+      button.btn.btn-success.btn-large(type='submit')
+       i.icon-white.icon-ok
+       |  Salva corso
+      
+
+block scripts
+  script(src='/js/ckeditor/ckeditor.js')
+
