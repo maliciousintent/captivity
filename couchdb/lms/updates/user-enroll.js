@@ -3,14 +3,10 @@
 function(doc, req) {
   var body = JSON.parse(req.body);
   
-  if (!doc || doc.type !== 'user') {
+  if (!doc || (doc.type !== 'course' && doc.type !== 'user')) {
     return [null, 'Cannot update this document (design).'];
   }
   
-  if (!Array.isArray(doc.courses)) {
-    doc.courses = [];
-  }
-  
-  doc.courses.push({ course_id: body.course_id, enrolled_on: new Date() });
+  doc.enabled = !!body.enabled;
   return [doc, '{ "ok": true }'];
 }

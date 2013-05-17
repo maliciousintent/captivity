@@ -33,6 +33,8 @@ function usersList(req, res, next) {
         users: doc.rows
       , courses: courses_doc.rows
       , moment: moment
+      , message: req.flash('message')
+      , error: req.flash('error')
       });
       
     });
@@ -159,23 +161,38 @@ function userToggle(req, res, next) {
 
 
 function userEnroll(req, res, next) {
-  var user_id = req.param('user_id')
-    , course_id = req.param('course_id');
+  if (!req.param('user') || typeof req.param('user') !== 'object') {
+    clog.ok('No users selected for enrollment.');
+    req.flash('error', 'Non hai selezionato alcun utente da iscrivere al corso.');
+    res.redirect('/users');
+    return;
+  }
+  
+  var course_id = req.param('course_id')
+    , users = Object.keys(req.param('user'));
     
-  db.atomic('lms', 'user-enroll', user_id, { course_id: course_id }, function (err, body) {
-    if (err) {
-      return next(err);
-    }
+  async.eachSeries(users, function (user_id, callback) {
+    clog.debug('Enrolling user {0} to course {1}'.format(user_id, course_id));
     
-    body = JSON.parse(body);
-    if (body.ok !== true) {
-      clog.error('Cannot enroll user {0} to course {1}'.format(user_id, course_id));
-      req.flash('error', 'Impossibile iscrivere l\'utente.');
-    } else {
-      clog.ok('User {0} enrolled to course {1}'.format(user_id, course_id));
-      req.flash('message', 'L\'utente è stato iscritto al corso.');
-    }
+    db.atomic('lms', 'user-enroll', user_id, { course_id: course_id }, function (err, body) {
+      if (err) {
+        clog.warn('Cannot enroll user {0}, skipping. DB Error:', err);
+        return callback();
+      }
+      
+      body = JSON.parse(body);
+      if (body.ok === true) {
+        clog.info('User enroll completed {0}'.format(user_id));
+      } else {
+        clog.warn('Cannot enroll user {0}'.format(user_id));
+      }
+      
+      callback();
+    });
     
+  }, function () {
+    clog.ok('Users enroll completed.');
+    req.flash('message', 'Gli utenti selezionati sono stati iscritti al corso.');
     res.redirect('/users');
   });
 }
