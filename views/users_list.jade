@@ -77,11 +77,11 @@ block content
                   td.avoid-search #{moment(item.doc.created_on).format('L')}
                   td.actions.avoid-search
                     if item.doc.enabled
-                      a.btn.btn-small.btn-danger(href='/users/disable/#{item.doc._id}', title='Disabilita')
-                        i.icon-ban-circle.icon-white
+                      a.btn.btn-small.btn-danger(href='/users/disable/#{item.doc._id}', title='Disabilita Utente')
+                        i.icon-ban-circle.icon-white.no-label
                     else
-                      a.btn.btn-small.btn-info(href='/users/disable/#{item.doc._id}', title='Abilita')
-                        i.icon-ok.icon-white
+                      a.btn.btn-small.btn-info(href='/users/disable/#{item.doc._id}', title='Abilita Utente')
+                        i.icon-ok.icon-white.no-label
                     | &nbsp;
                     a.btn.btn-small(href='/users/form/#{item.doc._id}')
                       i.icon-pencil.icon-white

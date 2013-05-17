@@ -170,6 +170,10 @@ hr {
 .main .btn.btn-large i {
   margin-top: 0;
 }
+.main .btn i.no-label {
+  margin-right: 0;
+  margin-top: 1px;
+}
 .main .btn:hover {
   background: #a8a8a8;
   -webkit-box-shadow: 0 0 3px #fff;

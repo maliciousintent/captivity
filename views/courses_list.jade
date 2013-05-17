@@ -39,13 +39,11 @@ block content
                 td.actions
                   
                   if item.doc.enabled
-                    a.btn.btn-small.btn-danger(href='/courses/disable/#{item.doc._id}')
-                      i.icon-ban-circle.icon-white
-                      |  Disabilita
+                    a.btn.btn-small.btn-danger(href='/courses/disable/#{item.doc._id}', title='Disabilita Corso')
+                      i.icon-ban-circle.icon-white.no-label
                   else
-                    a.btn.btn-small.btn-info(href='/courses/disable/#{item.doc._id}')
-                      i.icon-ok.icon-white
-                      |  Abilita
+                    a.btn.btn-small.btn-info(href='/courses/disable/#{item.doc._id}', title='Disabilita Corso')
+                      i.icon-ok.icon-white.no-label
                   | &nbsp;
                   a.btn.btn-small(href='/courses/form/#{item.doc._id}')
                     i.icon-pencil.icon-white
