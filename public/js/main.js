@@ -54,5 +54,30 @@ $(function () {
     reloadCounter();
   });
 
+  $('#user-search').bind('keyup', function () {
+    var realtimetarget = $('#' + $(this).attr('data-search-target') + ' tbody');
+    if(this.value.trim() === "") {
+      realtimetarget.find('tr').show();
+    } else {
+      realtimetarget.find('tr').hide();
+      var data = this.value.trim().toLowerCase().split(" ");
+      var jo = realtimetarget.find('tr'); 
+
+      $.each(jo, function(itr, tr) {
+        var foundArray = new Array();
+        $.each($(tr).find('td:not(.avoid-search)'), function(itd, td) {
+          $.each(data, function(itoken, token) {
+            if(token !== "" && $(td).text().toLowerCase().search(token) >= 0 && $.inArray(token, foundArray) === -1) {
+              foundArray.push(token);
+            }
+          });
+        });
+        if(foundArray.length === data.length) {
+          $(tr).show();
+        }
+      });
+    }
+  });
+
 
 });

@@ -34,13 +34,13 @@ block content
             p
               small.table-head &nbsp;
             div.input-append
-              input.span3.search-query(type='text', placeholder='Filtra Nome o Società...')
+              input.span3.search-query#user-search(type='text', placeholder='Filtra Nome o Società...', data-search-target='user-table')
 
           .clearfix
 
           hr
         
-          table.table.table-striped
+          table.table.table-striped#user-table
             thead
               tr
                 th.text-center(style='width: 30px;')
@@ -53,17 +53,17 @@ block content
             tbody
               each item in users
                 tr
-                  td.text-center
+                  td.text-center.avoid-search
                     input(type='checkbox', name='user[#{item.doc._id}]', value='enroll')
                   td #{item.doc.name}
                   td #{item.doc.company}
-                  td.text-center
+                  td.text-center.avoid-search
                     if item.doc.enabled
                       img.image-icon(src='/img/icon-status-ok.png', title='Utente attivo')
                     else
                       img.image-icon(src='/img/icon-status-error.png', title='Utente disabilitato')
-                  td #{moment(item.doc.created_on).format('LLL')}
-                  td.actions
+                  td.avoid-search #{moment(item.doc.created_on).format('LLL')}
+                  td.actions.avoid-search
                     if item.doc.enabled
                       a.btn.btn-small.btn-danger(href='/users/disable/#{item.doc._id}')
                         i.icon-ban-circle.icon-white

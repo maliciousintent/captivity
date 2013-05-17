@@ -331,3 +331,7 @@ hr {
   -webkit-border-bottom-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+.main form .search-query {
+  padding-left: 12px;
+  padding-right: 12px;
+}
