@@ -1,5 +1,10 @@
 extends layout_user
 
+block breadcrumb
+  li.spacer &raquo;
+  li
+    a(href='/courses') Nome del corso attivo
+
 block content
   script(type='text/javascript')
     window.CAPTIVITY_LMS = true;
