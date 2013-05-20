@@ -222,6 +222,12 @@ hr {
 .main .alert {
   border-width: 2px;
 }
+.main .table-head {
+  color: #999;
+}
+.main .table-head b {
+  color: #666;
+}
 .main table.table tr th.text-center,
 .main table.table tr td.text-center {
   text-align: center;
@@ -247,15 +253,11 @@ hr {
 .main table.table tr:last-child td {
   border-bottom: 2px solid #e2e2e2;
 }
-.main .bootstrap-select .filter-option {
-  width: 175px;
-  text-align: left;
-}
 .main .bootstrap-select .btn-dropdown {
   background-color: #fff;
   border-color: #fff;
-  -webkit-box-shadow: 0 0 2px rgba(0,0,0,0.3);
-  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
   color: #333;
   outline: none;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -268,6 +270,14 @@ hr {
 }
 .main .bootstrap-select .btn-dropdown:hover {
   background: #fff;
+}
+.main .bootstrap-select .btn-dropdown span.filter-option {
+  width: 175px;
+  text-align: left;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .main .bootstrap-select.open .btn {
   background: #fff;
@@ -285,6 +295,14 @@ hr {
   -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.3);
   box-shadow: 0 0 5px rgba(0,0,0,0.3);
   margin-top: 5px;
+  max-width: 400px;
+}
+.main .bootstrap-select ul.dropdown-menu li .text {
+  display: block;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .main .bootstrap-select ul.dropdown-menu li a {
   color: #333;

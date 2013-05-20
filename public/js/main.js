@@ -54,7 +54,7 @@ $(function () {
     reloadCounter();
   });
 
-  $('#user-search').bind('keyup', function () {
+  $('#user-search').on('keyup', function () {
     var realtimetarget = $('#' + $(this).attr('data-search-target') + ' tbody');
     if(this.value.trim() === "") {
       realtimetarget.find('tr').show();
@@ -78,6 +78,5 @@ $(function () {
       });
     }
   });
-
 
 });

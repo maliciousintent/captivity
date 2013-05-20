@@ -173,6 +173,10 @@ hr
   .alert
     border-width 2px
 
+  .table-head
+    color #999
+    b
+      color #666
   table.table
     tr
       th.text-center,
@@ -197,13 +201,10 @@ hr
           border-bottom 2px solid #E2E2E2
 
   .bootstrap-select
-    .filter-option
-      width 175px
-      text-align left
     .btn-dropdown
       background-color #FFF
       border-color #FFF
-      box-shadow 0 0 2px rgba(#000,0.3)
+      box-shadow 0 0 2px rgba(#000,0.5)
       color #333
       outline none
       font-family 'Helvetica Neue', Helvetica, Arial, sans-serif
@@ -212,6 +213,12 @@ hr
         opacity 0.3
       &:hover
         background #FFF
+      span.filter-option        
+        width 175px
+        text-align left
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
     &.open
       .btn
         background #FFF
@@ -224,7 +231,13 @@ hr
       border-radius 3px
       box-shadow 0 0 5px rgba(#000, 0.3)
       margin-top 5px
+      max-width 400px
       li
+        .text
+          display block
+          overflow hidden
+          text-overflow ellipsis
+          white-space nowrap
         a
           color #333
           cursor pointer

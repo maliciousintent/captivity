@@ -45,7 +45,7 @@ block content
             p
               small.table-head &nbsp;
             div.input-append
-              input.span3.search-query#user-search(type='text', placeholder='Filtra Nome o Società...', data-search-target='user-table')
+              input.span3.search-query#user-search(type='search', placeholder='Filtra Nome o Società...', data-search-target='user-table')
 
           .clearfix
 
@@ -56,11 +56,11 @@ block content
               tr
                 th.text-center(style='width: 30px;')
                   input(type='checkbox')
-                th.span3 Nome e cognome
-                th.span2 Società
+                th.span3(style="width: auto;") Nome e cognome
+                th.span2(style="width: auto;") Società
                 th.text-center(style="width: 50px;") Stato
-                th.span3 Data creazione
-                th.span3 &nbsp;
+                th.span3(style="width: 180px;") Data creazione
+                th.span3(style="width: 210px;") &nbsp;
             tbody
               each item in users
                 tr
