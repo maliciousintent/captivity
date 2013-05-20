@@ -56,7 +56,7 @@ function reportsList(req, res, next) {
       return next(err);
     }
 
-    data.reports = data.reports.rows.map(function (row) { return row.doc; });
+    data.reports = data.reports.rows.map(function (row) { return row.doc; }).sortBy('created_on', true);
     data.courses = data.courses.rows.map(function (row) { return row.doc; }).groupBy('_id'); //.map(function (row) { return row[0].doc; });
     data.users = data.users.rows.map(function (row) { return row.doc; }).groupBy('_id'); //.map(function (row) { return row[0].doc; });
 
@@ -101,10 +101,13 @@ function reportDetail (req, res, next) {
         return next(err);
       }
       
+      // data.report.events = data.report.events.orderBy('created_on'); ??
+      
       res.render('reports_detail', {
         report: doc_report
-      , user: data.user
-      , course: data.course
+      , user: data.user[0]
+      , course: data.course[0]
+      , moment: moment
       });
     });
 

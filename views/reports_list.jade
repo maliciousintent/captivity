@@ -5,7 +5,7 @@ block content
   .row
     .span8
       h3 Reports 
-        small Questa pagina visualizza i report su iscrizioni e fruizioni dei corsi.
+        small questa pagina visualizza i report su iscrizioni e fruizioni dei corsi.
       
   hr
 
@@ -26,9 +26,9 @@ block content
             tr
               th.span3(style="width: auto;") Utente
               th.span4(style="width: auto;") Nome corso
-              th.span1.text-center(style="width: auto;") Stato iscrizione
+              th.span1.text-center(style="width: 100px;") Stato iscrizione
               th.span6(style="width: auto;") Ultimo evento
-              th.span1(style="width: 210px;") &nbsp;
+              th.span1(style="width: 90px;") &nbsp;
           tbody
             each report in reports
               if users[report.user_id] && users[report.user_id] && report.events && report.events.length > 0
@@ -56,8 +56,8 @@ block content
                 tr.error
                   td.text-center(colspan=4) 
                     small 
-                      strong Si è verificato un errore
-                      | , dovresti contattare il supporto fornendo questo riferimento: #{report._id}.
+                      strong Questo report non è valido
+                      | , dovresti contattare il supporto. Riferimento: #{report._id}.
                   
                   td.actions.avoid-search
                     a.btn.btn-small(href='/reports/#{report._id}')

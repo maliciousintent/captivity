@@ -201,7 +201,7 @@ function userEnroll(req, res, next) {
     
   }, function () {
     clog.ok('Users enroll completed.');
-    req.flash('message', 'Sto iscrivendo al corso gli utenti selezionati, l\'operazione potrebbe richiedere qualche secondo.');
+    req.flash('message', 'Gli utenti selezionati sono stati iscritti correttamente al corso.');
     res.redirect('/users');
   });
 

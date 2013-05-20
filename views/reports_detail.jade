@@ -4,66 +4,63 @@ block content
   .spacer
   .row
     .span8
-      h3 Reports 
-        small Questa pagina visualizza i report su iscrizioni e fruizioni dei corsi.
+      h3 Tracciamento #{user.name}
       
   hr
 
   .row
     .span12
       
-      if message.length
-        .alert.alert-success.alert-block
-          p #{message}
+      p Di seguito trovi i dettagli del tracciamento di #{user.name} per il corso #{course.name}.
+        | Le azioni sono visualizzate in ordine cronologico dalla più recente (in alto) alla prima eseguita (in fondo).
+        br
+        |  Sono tracciate le seguenti tipologie di evento: 
+        b iscrizione (enrollment), iniziato, sospeso, abbandonato, completato
+        | . Per alcune tipolgie di tracciamento sono previsti dettagli aggiuntivi.
       
-      if error.length > 0
-        .alert.alert-danger.alert-block
-          p #{error}
+      p
+        b Dati Utente: 
+        span 
+          a(href='mailto:#{user.email}') #{user.name}
+          | , #{user.company} 
+          | (username: #{user.username})
+          
+        br
+        b Dati Corso: 
+        span #{course.name} creato il #{moment(course.created_on).format('LLL')}
+
+  hr
+
+  .row
+    .span12
       
-      if reports.length > 0
+      h5 Tracciamento
+      
+      if report.events && report.events.length > 0
         table.table.table-striped#user-table
           thead
             tr
-              th.span3(style="width: auto;") Utente
-              th.span4(style="width: auto;") Nome corso
-              th.span1.text-center(style="width: auto;") Stato iscrizione
-              th.span6(style="width: auto;") Ultimo evento
-              th.span1(style="width: 210px;") &nbsp;
+              th.span3 Data
+              th.span3 Descrizione
+              th.span6 Dettagli
           tbody
-            each report in reports
-              if users[report.user_id] && users[report.user_id] && report.events && report.events.length > 0
-                tr
-                  td 
-                    a(href='/courses/form/#{report.user_id}') #{users[report.user_id][0].name}
-                  td 
-                    a(href='/courses/form/#{report.course_id}') #{courses[report.course_id][0].name}
-                  td.text-center.avoid-search
-                    if users[report.user_id][0].enabled && courses[report.course_id][0].enabled
-                      img.image-icon(src='/img/icon-status-ok.png', title='Utente e corso sono attivi')
-                    else
-                      img.image-icon(src='/img/icon-status-error.png', title='Utente o corso non sono attivi.')
-                  
-                  td.avoid-search
-                    | #{report.events[report.events.length - 1].description}
-                    |  (#{moment(report.events[report.events.length - 1].created_on).fromNow()})
-
-                  td.actions.avoid-search
-                    a.btn.btn-small(href='/reports/#{report._id}')
-                      i.icon-th-list.icon-white
-                      | Dettagli
-                  
+            
+          for event in report.events
+            tr
+              td #{moment(event.created_on).format('LLL')}
+              if event.type === 'enrollment'
+                td #{event.description}
+                td &ndash;
               else
-                tr.error
-                  td.text-center(colspan=4) 
-                    small 
-                      strong Si è verificato un errore
-                      | , dovresti contattare il supporto fornendo questo riferimento: #{report._id}.
-                  
-                  td.actions.avoid-search
-                    a.btn.btn-small(href='/reports/#{report._id}')
-                      i.icon-th-list.icon-white
-                      | Dettagli
-      
+                td(colspan=2)
+                  span.label.label-important Errore
+                  |  tracciamento sconosciuto
+              
       else
-        p.alert.alert-info Nessun report da visualizzare.
-
+        .alert.alert-danger.alert-block
+          p 
+            strong Errore della piattaforma
+            br
+            | Non è stato tracciato nessun evento per questo report (tuttavia almeno un record di enrollment dovrebbe essere presente).
+            br
+            | Per favore, contatta il supporto fornendo il seguente riferimento: #{report._id}.

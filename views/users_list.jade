@@ -4,7 +4,8 @@ block content
   .spacer
   .row
     .span8
-      h3 Utenti
+      h3 Utenti 
+        small da questa pagina puoi creare, modificare e iscrivere utenti ai corsi
       
     .span4
       .spacer
@@ -39,7 +40,7 @@ block content
             | &nbsp;
             button.btn.btn-success.btn-small(type='submit', name='enroll', value='Enroll')
               i.icon-white.icon-chevron-right 
-              |  Iscrivi
+              |  Iscrivi al corso
 
           .pull-right
             p
@@ -59,8 +60,8 @@ block content
                 th.span3(style="width: auto;") Nome e cognome
                 th.span2(style="width: auto;") Società
                 th.text-center(style="width: 50px;") Stato
-                th.span3(style="width: 180px;") Data creazione
-                th.span3(style="width: 210px;") &nbsp;
+                th.span3(style="width: 90px;") Aggiunto il
+                th.span3(style="width: 270px;") &nbsp;
             tbody
               each item in users
                 tr
@@ -73,23 +74,28 @@ block content
                       img.image-icon(src='/img/icon-status-ok.png', title='Utente attivo')
                     else
                       img.image-icon(src='/img/icon-status-error.png', title='Utente disabilitato')
-                  td.avoid-search #{moment(item.doc.created_on).format('LLL')}
+                  td.avoid-search #{moment(item.doc.created_on).format('L')}
                   td.actions.avoid-search
                     if item.doc.enabled
-                      a.btn.btn-small.btn-danger(href='/users/disable/#{item.doc._id}')
+                      a.btn.btn-small.btn-danger(href='/users/disable/#{item.doc._id}', title='Disabilita')
                         i.icon-ban-circle.icon-white
-                        |  Disabilita
                     else
-                      a.btn.btn-small.btn-info(href='/users/disable/#{item.doc._id}')
+                      a.btn.btn-small.btn-info(href='/users/disable/#{item.doc._id}', title='Abilita')
                         i.icon-ok.icon-white
-                        |  Abilita
                     | &nbsp;
                     a.btn.btn-small(href='/users/form/#{item.doc._id}')
                       i.icon-pencil.icon-white
                       |  Modifica
+                    | &nbsp;
+                    a.btn.btn-small(href='/reports/?filter_user=#{item.doc._id}')
+                      i.icon-eye-open.icon-white
+                      |  Traccia
       
       
       else
         
         p.alert.alert-info Non è stato inserito ancora alcun utente.
 
+      p
+        span.label.label-info Info sull'iscrizione 
+        | puoi iscrivere un utente più di una volta al medesimo corso, quest'ultimo comparirà più volte nella home page dell'utente.

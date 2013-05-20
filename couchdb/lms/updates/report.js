@@ -17,8 +17,9 @@ function(doc, req) {
     , user_id: body.user_id
     , events: [{
         created_on: new Date()
+      , type: 'enrollment'
       , description: 'Enrollment'
-      , data: {}
+      , details: {}
       }]
     , created_on: new Date()
     };
