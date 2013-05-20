@@ -1,0 +1,63 @@
+extends layout
+
+block content
+  .spacer
+  .row
+    .span8
+      h3 Reports 
+        small Questa pagina visualizza i report su iscrizioni e fruizioni dei corsi.
+      
+  hr
+
+  .row
+    .span12
+      
+      if message.length
+        .alert.alert-success.alert-block
+          p #{message}
+      
+      if error.length > 0
+        .alert.alert-danger.alert-block
+          p #{error}
+      
+      if reports.length > 0
+        table.table.table-striped#user-table
+          thead
+            tr
+              th.span3(style="width: auto;") Utente
+              th.span3(style="width: auto;") Nome corso
+              th.span3(style="width: auto;") Stato iscrizione
+              th.span3.text-center(style="width: auto;") Ultimo evento
+              th.span3(style="width: 210px;") &nbsp;
+          tbody
+            each report in reports
+              if users[report.user_id] && users[report.user_id]
+                tr
+                  td #{users[report.user_id].name}
+                  td #{courses[report.course_id].name}
+                  td.text-center.avoid-search
+                    if users[report.user_id].enabled && courses[report.course_id].enabled
+                      img.image-icon(src='/img/icon-status-ok.png', title='Utente e corso sono attivi')
+                    else
+                      img.image-icon(src='/img/icon-status-error.png', title='L\'utente o il corso non sono attivi.')
+                  td.avoid-search #{moment(report.created_on).format('LLL')}
+                  td.actions.avoid-search
+                    if report.enabled
+                      a.btn.btn-small.btn-danger(href='/users/disable/#{report._id}')
+                        i.icon-ban-circle.icon-white
+                        |  Disabilita
+                    else
+                      a.btn.btn-small.btn-info(href='/users/disable/#{report._id}')
+                        i.icon-ok.icon-white
+                        |  Abilita
+                    | &nbsp;
+                    a.btn.btn-small(href='/users/form/#{report._id}')
+                      i.icon-pencil.icon-white
+                      |  Modifica
+              else
+                tr.error
+                  td.text-center(colspan=5) Riga non conforme (rif. #{report._id})
+      
+      else
+        p.alert.alert-info Nessun report da visualizzare.
+

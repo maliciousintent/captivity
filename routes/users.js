@@ -1,4 +1,4 @@
-/*jshint node:true, laxcomma:true, indent:2, eqnull:true, es5:true */
+/*jshint node:true, laxcomma:true, indent:2, eqnull:true */
 
 'use strict';
 
@@ -170,8 +170,9 @@ function userEnroll(req, res, next) {
   
   var course_id = req.param('course_id')
     , users = Object.keys(req.param('user'));
-    
-  async.eachSeries(users, function (user_id, callback) {
+  
+
+  async.each(users, function (user_id, callback) {
     clog.debug('Enrolling user {0} to course {1}'.format(user_id, course_id));
     
     db.atomic('lms', 'user-enroll', user_id, { course_id: course_id }, function (err, body) {
@@ -179,22 +180,31 @@ function userEnroll(req, res, next) {
         clog.warn('Cannot enroll user {0}, skipping. DB Error:', err);
         return callback();
       }
-      
-      body = JSON.parse(body);
+
       if (body.ok === true) {
         clog.info('User enroll completed {0}'.format(user_id));
+
+        db.atomic('lms', 'report', '', { course_id: course_id, user_id: user_id }, function (err, body) {
+          if (err) {
+            clog.warn('Cannot create user report document', err);
+            return callback();
+          }
+
+          clog.info('User report created.');
+          callback();
+        });
       } else {
         clog.warn('Cannot enroll user {0}'.format(user_id));
       }
       
-      callback();
     });
     
   }, function () {
     clog.ok('Users enroll completed.');
-    req.flash('message', 'Gli utenti selezionati sono stati iscritti al corso.');
+    req.flash('message', 'Sto iscrivendo al corso gli utenti selezionati, l\'operazione potrebbe richiedere qualche secondo.');
     res.redirect('/users');
   });
+
 }
 
 

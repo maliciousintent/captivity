@@ -1,4 +1,4 @@
-/*jshint node:true, laxcomma:true, indent:2, eqnull:true, es5:true */
+/*jshint node:true, laxcomma:true, indent:2, eqnull:true */
 
 'use strict';
 
@@ -39,13 +39,20 @@ app.use(flash());
 app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.errorHandler());
+
+//app.use(express.errorHandler());
+app.use(function(err, req, res, next){
+  console.error(err.stack);
+  res.send(500, 'Something broke!');
+});
 
 
 require('./routes/users.js')(app);
 require('./routes/courses.js')(app);
+require('./routes/reports.js')(app);
 require('./routes/scorm_api.js')(app);
 require('./routes/player.js')(app);
+
 
 app.get('/', function (req, res) {
   res.redirect('/courses');
