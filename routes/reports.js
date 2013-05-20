@@ -74,11 +74,49 @@ function reportsList(req, res, next) {
 }
 
 
+function reportDetail (req, res, next) {
+  var id = req.param('id');
+  
+  db.get(id, function (err, doc_report) {
+    if (err) {
+      clog.error('Cannot get details for this report.');
+      return next(err);
+    }
+    
+    if (doc_report.type !== 'report') {
+      clog.error('HTTP 404. Cannot get details of a non-report document.');
+      return next(new Error('Type mismatch.'));
+    }
+    
+    async.parallel({
+      user: function (done) {
+        db.get(doc_report.user_id, done);
+      },
+      course: function (done) {
+        db.get(doc_report.course_id, done);
+      }
+    }, function (err, data) {
+      if (err) {
+        clog.error('Cannot get user or course for this report.');
+        return next(err);
+      }
+      
+      res.render('reports_detail', {
+        report: doc_report
+      , user: data.user
+      , course: data.course
+      });
+    });
+
+  });
+}
+
 
 module.exports = function (app) {
   var PREFIX = '/reports';
   
   app.get(PREFIX, reportsList);
+  app.get(PREFIX + '/:id', reportDetail);
 };
  
  

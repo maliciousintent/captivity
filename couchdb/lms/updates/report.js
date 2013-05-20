@@ -15,6 +15,11 @@ function(doc, req) {
     , type: 'report'
     , course_id: body.course_id
     , user_id: body.user_id
+    , events: [{
+        created_on: new Date()
+      , description: 'Enrollment'
+      , data: {}
+      }]
     , created_on: new Date()
     };
 
