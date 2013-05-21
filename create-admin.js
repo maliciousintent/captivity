@@ -75,6 +75,7 @@ async.waterfall([
     , language: 'it'
     , created_on: new Date()
     , admin: true
+    , enabled: true
     , username: username
     , password: password
     }, function (err) {
@@ -84,6 +85,7 @@ async.waterfall([
       }
       
       console.log('\nUser created!'.bold.green);
+      console.log('Please customize user details from the admin control panel.'.green);
     });
     
   }
