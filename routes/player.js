@@ -1,4 +1,4 @@
-/*jshint node:true, laxcomma:true, indent:2, eqnull:true, es5:true */
+/*jshint node:true, laxcomma:true, indent:2, eqnull:true */
 
 'use strict';
 
@@ -14,7 +14,6 @@ var db = require('nano')(process.env.DATABASE_URL)
 
 require('sugar');
 moment.lang('it');
-
 
 
 function player(req, res, next) {

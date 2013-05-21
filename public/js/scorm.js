@@ -30,6 +30,7 @@ var API = (function () {
    */
   
   var SCORM = {}
+    , SCORM_API_PREFIX = window.SCORM_API_PREFIX
     , cache = new MicroCache()
     , committed = true
     , _debug = function () {
@@ -64,7 +65,7 @@ var API = (function () {
   SCORM.Initialize = function () {
     _debug('Initialize');
     
-    return xhr('POST', '/SCORM/Initialize', {});
+    return xhr('POST', SCORM_API_PREFIX + 'Initialize', {});
   };
   
   SCORM.SetValue = function (key, value) {
@@ -84,7 +85,7 @@ var API = (function () {
     
     if (!committed) {
       committed = true;
-      return xhr('POST', '/SCORM/Commit', { data: JSON.stringify(cache.values()), date: new Date() });
+      return xhr('POST', SCORM_API_PREFIX + 'Commit', { data: JSON.stringify(cache.values()), date: new Date() });
     } else {
       console.log('Nothing to commit.');
     }
@@ -99,7 +100,7 @@ var API = (function () {
     if (from_cache != null) {
       return from_cache;
     } else {
-      from_xhr = xhr('GET', '/SCORM/Get', { key: key });
+      from_xhr = xhr('GET', SCORM_API_PREFIX + 'Get', { key: key });
       cache.set(key, from_xhr);
       return from_xhr;
     }
@@ -109,7 +110,7 @@ var API = (function () {
     _debug('Terminate');
     
     SCORM.Commit('');
-    xhr('POST', '/SCORM/Terminate', {});
+    xhr('POST', SCORM_API_PREFIX + 'Terminate', {});
   };
   
   // Support Methods
