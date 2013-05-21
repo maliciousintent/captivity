@@ -57,11 +57,11 @@ block content
               tr
                 th.text-center(style='width: 30px;')
                   input(type='checkbox')
-                th.span3(style="width: auto;") Nome e cognome
-                th.span2(style="width: auto;") Società
+                th(style="width: auto;") Nome e cognome
+                th(style="width: auto;") Società
                 th.text-center(style="width: 50px;") Stato
-                th.span3(style="width: 90px;") Aggiunto il
-                th.span3(style="width: 270px;") &nbsp;
+                th(style="width: 90px;") Aggiunto il
+                th(style="width: 270px;") &nbsp;
             tbody
               each item in users
                 tr
@@ -77,18 +77,17 @@ block content
                   td.avoid-search #{moment(item.doc.created_on).format('L')}
                   td.actions.avoid-search
                     if item.doc.enabled
-                      a.btn.btn-small.btn-danger(href='/users/disable/#{item.doc._id}', title='Disabilita')
-                        i.icon-ban-circle.icon-white
+                      a.btn.btn-small.btn-danger(href='/users/disable/#{item.doc._id}', title='Disabilita Utente')
+                        i.icon-ban-circle.icon-white.no-label
                     else
-                      a.btn.btn-small.btn-info(href='/users/disable/#{item.doc._id}', title='Abilita')
-                        i.icon-ok.icon-white
+                      a.btn.btn-small.btn-info(href='/users/disable/#{item.doc._id}', title='Abilita Utente')
+                        i.icon-ok.icon-white.no-label
                     | &nbsp;
-                    a.btn.btn-small(href='/users/form/#{item.doc._id}')
-                      i.icon-pencil.icon-white
-                      |  Modifica
+                    a.btn.btn-small(href='/users/form/#{item.doc._id}', title='Modifica Utente')
+                      i.icon-pencil.icon-white.no-label
                     | &nbsp;
                     a.btn.btn-small(href='/reports/?filter_user=#{item.doc._id}')
-                      i.icon-eye-open.icon-white
+                      i.icon-tasks.icon-white
                       |  Traccia
       
       

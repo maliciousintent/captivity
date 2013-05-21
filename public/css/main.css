@@ -170,6 +170,10 @@ hr {
 .main .btn.btn-large i {
   margin-top: 0;
 }
+.main .btn i.no-label {
+  margin-right: 0;
+  margin-top: 1px;
+}
 .main .btn:hover {
   background: #a8a8a8;
   -webkit-box-shadow: 0 0 3px #fff;
@@ -252,6 +256,13 @@ hr {
 }
 .main table.table tr:last-child td {
   border-bottom: 2px solid #e2e2e2;
+}
+.main table.table tr.error td {
+  color: #da4f49;
+  border-color: #f4cac8;
+}
+.main table.table tr.success td {
+  border-color: #bde2bd;
 }
 .main .bootstrap-select .btn-dropdown {
   background-color: #fff;

@@ -24,11 +24,11 @@ block content
         table.table.table-striped#user-table
           thead
             tr
-              th.span3(style="width: auto;") Utente
-              th.span4(style="width: auto;") Nome corso
-              th.span1.text-center(style="width: 100px;") Stato iscrizione
-              th.span6(style="width: auto;") Ultimo evento
-              th.span1(style="width: 90px;") &nbsp;
+              th(style="width: auto;") Utente
+              th(style="width: auto;") Nome corso
+              th.text-center(style="width: 100px;") Stato iscrizione
+              th(style="width: auto;") Ultimo evento
+              th(style="width: 100px;") &nbsp;
           tbody
             each report in reports
               if users[report.user_id] && users[report.user_id] && report.events && report.events.length > 0
@@ -48,21 +48,21 @@ block content
                     |  (#{moment(report.events[report.events.length - 1].created_on).fromNow()})
 
                   td.actions.avoid-search
-                    a.btn.btn-small(href='/reports/#{report._id}')
-                      i.icon-th-list.icon-white
-                      | Dettagli
+                    a.btn.btn-small(href='/reports/#{report._id}', title='Guarda il dettaglio')
+                      i.icon-eye-open.icon-white
+                      |  Dettagli
                   
               else
                 tr.error
-                  td.text-center(colspan=4) 
+                  td.text-center(colspan=4)
                     small 
-                      strong Questo report non è valido
-                      | , dovresti contattare il supporto. Riferimento: #{report._id}.
+                      span.label.label-important Questo report non è valido
+                      | , dovresti contattare il supporto. Riferimento: <em>#{report._id}.</em>
                   
                   td.actions.avoid-search
-                    a.btn.btn-small(href='/reports/#{report._id}')
-                      i.icon-th-list.icon-white
-                      | Dettagli
+                    a.btn.btn-small(href='/reports/#{report._id}', title='Guarda il dettaglio')
+                      i.icon-exclamation-sign.icon-white
+                      |  Dettagli
       
       else
         p.alert.alert-info Nessun report da visualizzare.
