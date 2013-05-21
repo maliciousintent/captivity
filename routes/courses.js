@@ -1,4 +1,4 @@
-/*jshint node:true, laxcomma:true, indent:2, eqnull:true, es5:true */
+/*jshint node:true, laxcomma:true, indent:2, eqnull:true */
 
 'use strict';
 
@@ -10,14 +10,17 @@ var db = require('nano')(process.env.DATABASE_URL)
   , tmp = require('tmp')
   , unzip = require('unzip')
   , uuid = require('node-uuid')
-  , fs = require('fs');
+  , fs = require('fs')
+  , login = require('./login-utils');
 
 require('sugar');
 moment.lang('it');
 
+
 if (!fs.existsSync('public/temp')) {
   fs.mkdirSync('public/temp');
 }
+
 
 function _uploadToCloud(path, callback) {
   // should recursively upload "path" to a cloud storage
@@ -200,14 +203,14 @@ function courseToggle(req, res, next) {
 module.exports = function (app) {
   var PREFIX = '/courses';
   
-  app.get(PREFIX, coursesList);
+  app.get(PREFIX, login.requireLogin('admin'), coursesList);
   
-  app.get(PREFIX + '/form', coursesForm);
-  app.get(PREFIX + '/form/:id', coursesForm);
-  app.post(PREFIX, courseUpdate);
+  app.get(PREFIX + '/form', login.requireLogin('admin'), coursesForm);
+  app.get(PREFIX + '/form/:id', login.requireLogin('admin'), coursesForm);
+  app.post(PREFIX, login.requireLogin('admin'), courseUpdate);
   
-  app.get(PREFIX + '/disable/:id', courseToggleForm);
-  app.put(PREFIX + '/disable', courseToggle);
+  app.get(PREFIX + '/disable/:id', login.requireLogin('admin'), courseToggleForm);
+  app.put(PREFIX + '/disable', login.requireLogin('admin'), courseToggle);
   
 };
  

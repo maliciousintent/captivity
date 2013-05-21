@@ -10,7 +10,8 @@ var db = require('nano')(process.env.DATABASE_URL)
   , tmp = require('tmp')
   , unzip = require('unzip')
   , uuid = require('node-uuid')
-  , bcrypt = require('bcrypt');
+  , bcrypt = require('bcrypt')
+  , login = require('./login-utils');
 
 require('sugar');
 moment.lang('it');
@@ -212,16 +213,16 @@ function userEnroll(req, res, next) {
 module.exports = function (app) {
   var PREFIX = '/users';
   
-  app.get(PREFIX, usersList);
+  app.get(PREFIX, login.requireLogin('admin'), usersList);
   
-  app.get(PREFIX + '/form', usersForm);
-  app.get(PREFIX + '/form/:id', usersForm);
-  app.post(PREFIX, userUpdate);
+  app.get(PREFIX + '/form', login.requireLogin('admin'), usersForm);
+  app.get(PREFIX + '/form/:id', login.requireLogin('admin'), usersForm);
+  app.post(PREFIX, login.requireLogin('admin'), userUpdate);
   
-  app.get(PREFIX + '/disable/:id', userToggleForm);
-  app.put(PREFIX + '/disable', userToggle);
+  app.get(PREFIX + '/disable/:id', login.requireLogin('admin'), userToggleForm);
+  app.put(PREFIX + '/disable', login.requireLogin('admin'), userToggle);
   
-  app.put(PREFIX + '/enroll', userEnroll);
+  app.put(PREFIX + '/enroll', login.requireLogin('admin'), userEnroll);
 };
  
  

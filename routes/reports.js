@@ -9,7 +9,8 @@ var db = require('nano')(process.env.DATABASE_URL)
   , clog = require('clog')
   , tmp = require('tmp')
   , unzip = require('unzip')
-  , uuid = require('node-uuid');
+  , uuid = require('node-uuid')
+  , login = require('./login-utils');
 
 require('sugar');
 moment.lang('it');
@@ -118,8 +119,8 @@ function reportDetail (req, res, next) {
 module.exports = function (app) {
   var PREFIX = '/reports';
   
-  app.get(PREFIX, reportsList);
-  app.get(PREFIX + '/:id', reportDetail);
+  app.get(PREFIX, login.requireLogin('admin'), reportsList);
+  app.get(PREFIX + '/:id', login.requireLogin('admin'), reportDetail);
 };
  
  

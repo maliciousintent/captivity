@@ -7,6 +7,7 @@ var express = require('express')
   , path = require('path')  
   , clog = require('clog')
   , flash = require('connect-flash')
+  , RedisStore = require('connect-redis')(express)
   , colors = require('colors')
   , asciify = require('asciify');
 
@@ -34,17 +35,16 @@ app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here'));
-app.use(express.session());
+app.use(express.session({ secret: 'asdasaq9389uionjkefsf', store: new RedisStore() }));
 app.use(flash());
 app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
-
-//app.use(express.errorHandler());
-app.use(function(err, req, res, next){
-  console.error(err.stack);
-  res.send(500, 'Something broke!');
-});
+app.use(express.errorHandler());
+// app.use(function(err, req, res, next){
+//   console.error(err.stack);
+//   res.send(500, 'Something broke!');
+// });
 
 
 require('./routes/users.js')(app);
@@ -52,6 +52,7 @@ require('./routes/courses.js')(app);
 require('./routes/reports.js')(app);
 require('./routes/scorm_api.js')(app);
 require('./routes/player.js')(app);
+require('./routes/login-utils.js').setupLogin(app);
 
 
 app.get('/', function (req, res) {

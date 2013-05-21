@@ -10,7 +10,8 @@ var db = require('nano')(process.env.DATABASE_URL)
   , tmp = require('tmp')
   , unzip = require('unzip')
   , uuid = require('node-uuid')
-  , fs = require('fs');
+  , fs = require('fs')
+  , login = require('./login-utils');
 
 require('sugar');
 moment.lang('it');
@@ -43,6 +44,6 @@ function player(req, res, next) {
 
 module.exports = function (app) {
   var PREFIX = '/player';  
-  app.get(PREFIX + '/:url', player);
+  app.get(PREFIX + '/:url', login.requireLogin(), player);
 };
  
