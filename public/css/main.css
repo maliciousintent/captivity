@@ -349,7 +349,7 @@ hr {
   padding-right: 12px;
 }
 body.user {
-  padding-top: 80px;
+  padding-top: 75px;
   background: url("../img/captivity-pattern-big.png") center center no-repeat #f2f2f2;
   height: auto;
 }
@@ -399,7 +399,7 @@ body.user .navbar .navbar-inner ul.nav li:hover a i {
 }
 body.user .navbar .navbar-inner ul.nav li.spacer {
   line-height: 40px;
-  color: #ccc;
+  color: #999;
 }
 body.user .player-disabled {
   height: 170px;

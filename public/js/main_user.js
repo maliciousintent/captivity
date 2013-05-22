@@ -23,14 +23,15 @@ $(function () {
       
     var wh = $(window).height()
       , nh = $('.navbar').outerHeight()   // not used at the moment!
-      , margin = 45
+      , margin = 40
       , bpt = parseInt($('body').css('padding-top').replace('px',''), 10);
 
     console.log(wh, nh, margin, bpt, (wh - bpt - margin));
 
     setTimeout(function () {
       $('#course-iframe').css({
-        'height': (wh - bpt - margin) + 'px'
+        'height': (wh - nh - margin) + 'px',
+        'margin-top': (nh - bpt + margin/2) + 'px'
       });
     }, 50);
     

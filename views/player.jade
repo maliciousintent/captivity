@@ -16,12 +16,11 @@ block content
   
   .player-container(style='width: 100%; height: 100%; min-height: 100%; border: 0;')
     iframe#course-iframe(src='#{course.scorm + '/' + course.scorm_index}', style='width: 100%; border: 0;')
-      
-  p.text-center
+
+block logged
+  li.spacer      
     small Stai svolgendo questo corso come 
       b #{user.username}
       | . Non sei 
       b #{user.name}
-      | ? 
-      a(href='/logout') Esci
-      | .
+      | ?
