@@ -8,13 +8,27 @@ block content
     .row
       .span8
         h4 I miei corsi
-        ul.my-courses
+        .my-courses
   
           for report in reports
             if report != null
-              li
-                a(href='/player/#{report.course.url}') #{report.course.name}
-                em.pull-right iscritto #{moment(report.created_on).format('LLL')}
+              .single-course
+                .row-fluid
+                  .span2
+                    img(src='')
+                  .span7
+                    .single-course-info
+                      div
+                        a(href='/player/#{report.course.url}') #{report.course.name}
+                        br
+                        em iscritto #{moment(report.created_on).format('LLL')}
+                  .span3
+                    .spacer
+                    .spacer
+                    a.btn.btn-info.btn-block.pull-right(href='/player/#{report.course.url}')
+                      i.icon-share.icon-white
+                      |  Vai al corso
+                .clearfix
                 .description
                    !{report.course.description}
                 

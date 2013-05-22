@@ -256,13 +256,38 @@ hr {
   margin: 0;
   list-style: none;
 }
-.main .my-courses li {
-  padding: 7px 0;
+.main .my-courses .single-course {
+  padding: 15px 0;
   border-top: 2px solid #e2e2e2;
 }
-.main .my-courses em {
+.main .my-courses .single-course img {
+  background: url("../img/captivity-placeholder.png") center center no-repeat;
+  width: 80px;
+  height: 80px;
+  -webkit-border-radius: 40px;
+  border-radius: 40px;
+  -webkit-border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.main .my-courses .single-course-info {
+  height: 80px;
+  display: table;
+  width: 100%;
+}
+.main .my-courses .single-course-info>div {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 17px;
+}
+.main .my-courses .single-course-info em {
   color: #999;
   font-size: 12px;
+}
+.main .my-courses .description {
+  margin-top: 10px;
+}
+.main .my-courses .description p {
+  margin-bottom: 0;
 }
 .main .my-profile {
   padding-top: 7px;
@@ -273,6 +298,7 @@ hr {
   line-height: 18px;
 }
 .main .my-profile p.large {
+  padding-top: 2px;
   font-size: 14px;
   line-height: 20px;
 }
