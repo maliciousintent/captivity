@@ -14,7 +14,8 @@ function(doc, req) {
   , user_id: body.user_id
   , event_type: body.event_type
   , event_description: body.event_description
-  , details: body.details || {}
+  , sco_data: body.sco_data || {}
+  , extra: body.extra || {}
   , created_on: new Date()
   };
   

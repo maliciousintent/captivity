@@ -83,7 +83,7 @@ var API = (function () {
       throw new Error('First parameter to SCORM.Commit *must* be an empty string.');
     }
     
-    if (!committed) {
+    if (!committed && cache.values().length > 0) {
       committed = true;
       return xhr('POST', SCORM_API_PREFIX + 'Commit', { data: JSON.stringify(cache.values()), date: new Date() });
     } else {

@@ -48,7 +48,7 @@ app.use(function _404handler(req, res, next) {
 });
 
 app.use(function _exceptionHandler(err, req, res, next) {
-  clog.error('Handling error', err);
+  clog.error('Handling error'.red.bold.inverse + ' at ' + req.url.red + ':\n', err);
   
   if (err.isBoom !== true) {
     err = Boom.internal(err);
