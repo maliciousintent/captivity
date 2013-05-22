@@ -28,8 +28,7 @@ block content
           tbody
             each item in courses
               tr
-                td
-                  a(href='/player/#{item.doc.url}', target='blank') #{item.doc.name}
+                td #{item.doc.name}
                 td.text-center
                   if item.doc.enabled
                     img.image-icon(src='/img/icon-status-ok.png', title='Corso attivo')
