@@ -4,7 +4,10 @@ block breadcrumb
 
 block content  
   if !production
-    pre(style='width: 90%; height: 150px; margin: auto; overflow-y: auto;') #{error.message}
+    .container
+      .row
+        .span8.offset2
+          pre(style='max-height: 150px; height: auto; overflow-y: auto;') #{error.message}
     
   .player-disabled
     p

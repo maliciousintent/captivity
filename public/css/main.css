@@ -428,3 +428,21 @@ body.user .player-container {
   height: 600px;
   margin: auto;
 }
+body.user .login-container {
+  height: 350px;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -175px;
+  margin-left: -250px;
+}
+body.user .login-container .control-label {
+  font-weight: normal;
+  color: #333;
+  text-shadow: 0 0 10px #fff;
+}
+body.user .login-container .alert {
+  text-align: center;
+  margin-bottom: 30px;
+}
