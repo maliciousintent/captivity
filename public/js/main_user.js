@@ -23,7 +23,7 @@ $(function () {
       
     var wh = $(window).height()
       , nh = $('.navbar').outerHeight()   // not used at the moment!
-      , margin = 20
+      , margin = 45
       , bpt = parseInt($('body').css('padding-top').replace('px',''), 10);
 
     console.log(wh, nh, margin, bpt, (wh - bpt - margin));
