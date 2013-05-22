@@ -2,6 +2,6 @@
 
 function (doc) {
   if (doc.type === 'report') {
-    emit([doc._id, doc.user_id, doc.course_id], null);
+    emit([doc.user_id, doc.course_id, doc._id], null);
   }
 }

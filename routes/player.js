@@ -48,8 +48,46 @@ function player(req, res, next) {
 }
 
 
+function dashboard(req, res, next) {
+  var user_id = req.user._id;
+    
+  db.view('lms', 'reports', { startkey: [user_id, null, null], endkey: [user_id, {}, {}], include_docs: true }, function (err, reports) {
+    if (err) {
+      clog.error('Error getting courses list for this user', err);
+      return next(err);
+    }
+    
+    var courses_ids = reports.rows.map(function (row) { return row.doc.course_id; }).unique()
+      , courses;
+    
+    db.view('lms', 'courses', { keys: courses_ids, include_docs: true }, function (err, courses) {
+      if (err) {
+        clog.error('Error getting courses docs', err);
+        return next(err);
+      }
+      
+      courses = courses.rows.map(function (row) { return row.doc; }).groupBy('_id');      
+      reports = reports.rows.map(function _expandDoc(row) {
+        clog.warn('id', row.doc.course_id);
+        if (courses[row.doc.course_id] != null) {
+          row.doc.course = courses[row.doc.course_id][0];        
+          return row.doc;
+        }
+      });
+      
+      res.render('dashboard', {
+        reports: reports
+      , moment: moment
+      });
+    });
+  });
+}
+
+
 module.exports = function (app) {
   var PREFIX = '/player';  
+  
   app.get(PREFIX + '/:url', login.requireLogin(), player);
+  app.get('/dashboard', login.requireLogin(), dashboard);
 };
  

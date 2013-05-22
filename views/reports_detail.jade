@@ -6,6 +6,13 @@ block content
     .span8
       h3 Tracciamento #{user.name}
       
+    .span4
+      .spacer
+      a.btn.pull-right.btn-primary(href='/users/login/#{user._id}?next=#{course.url}')
+        i.icon-white.icon-chevron-right
+        |  Apri come utente
+      
+      
   hr
 
   .row.profile

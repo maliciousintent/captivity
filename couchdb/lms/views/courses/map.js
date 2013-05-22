@@ -2,6 +2,6 @@
 
 function (doc) {
   if (doc.type === 'course') {
-    emit(doc, null);
+    emit(doc._id, null);
   }
 }
