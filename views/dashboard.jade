@@ -4,14 +4,17 @@ block breadcrumb
 
 block content
   
-  h4 I miei corsi
+  .container
+    .row
+      .span7
+        h4 I miei corsi
+        ul.my-courses
   
-  ul
-    for report in reports
-      if report != null && report.events
-        li
-          a(href='/player/#{report.course.url}') #{report.course.name} 
-          | &ndash; iscritto #{moment(report.events[report.events.length - 1].created_on).format('LLL')}
+          for report in reports
+            if report != null && report.events
+              li
+                a(href='/player/#{report.course.url}') #{report.course.name}
+                em.pull-right iscritto #{moment(report.events[report.events.length - 1].created_on).format('LLL')}
 
 block logged
   li.spacer      
