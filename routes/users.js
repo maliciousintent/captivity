@@ -137,7 +137,12 @@ function userLoginAs(req, res, next) {
   var as_id = req.param('id');
   
   req.session.user_impersonate = as_id;
-  res.redirect('/dashboard');
+  
+  if (req.param('next')) {
+    res.redirect('/player/' + req.param('next'));
+  } else {
+    res.redirect('/dashboard');
+  }
 }
 
 
