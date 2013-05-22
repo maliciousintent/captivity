@@ -39,7 +39,20 @@ module.exports.requireLogin = function (require_role) {
         return _redirectToLogin(req, res, 'Admin role is required to access this page.');
       }
       
-      next();
+      if (require_role !== 'admin' && doc.admin && req.session.user_impersonate) {
+        // Impersonating admin users for non-admin sections
+        db.get(req.session.user_impersonate, function (err, doc) {
+          if (err) {
+            return next(err);
+          }
+          
+          req.user = doc;
+          next();
+        });
+      } else {
+        req.user = doc;
+        next();
+      }
     });
     
   };

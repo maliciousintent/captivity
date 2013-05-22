@@ -19,7 +19,8 @@ moment.lang('it');
 
 
 function player(req, res, next) {
-  var url = req.param('url');
+  var url = req.param('url')
+    , user = req.user;
   
   db.view('lms', 'courses-by-url', { key: url, include_docs: true }, function (err, body) {
     if (err) {
@@ -39,7 +40,10 @@ function player(req, res, next) {
       //return res.render('player_disabled', { scorm: course });
     }
     
-    res.render('player', { scorm: course });
+    res.render('player', {
+      course: course
+    , user: user
+    });
   });
 }
 

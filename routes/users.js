@@ -127,7 +127,17 @@ function userUpdate(req, res, next) {
       });
     }
   ]);
+}
+
+
+function userLoginAs(req, res, next) {
+  // Admin users can login to non-admin sections impersonating other users
+  // See login-utils.requireLogin for the implementation
   
+  var as_id = req.param('id');
+  
+  req.session.user_impersonate = as_id;
+  res.redirect('/dashboard');
 }
 
 
@@ -214,6 +224,8 @@ module.exports = function (app) {
   var PREFIX = '/users';
   
   app.get(PREFIX, login.requireLogin('admin'), usersList);
+  
+  app.get(PREFIX + '/login/:id', login.requireLogin('admin'), userLoginAs);
   
   app.get(PREFIX + '/form', login.requireLogin('admin'), usersForm);
   app.get(PREFIX + '/form/:id', login.requireLogin('admin'), usersForm);
