@@ -1,5 +1,7 @@
-/*jshint curly: true, eqeqeq: true, forin: true, immed: true, latedef: true, newcap: true, noarg: true, noempty: true, nonew: true, quotmark: "single", sub: true, eqnull: true, indent: 2, unused: true, undef: true, strict: true, laxcomma: true, browser: true, es5: true, jquery: true */
-/*global */
+
+
+/*jshint browser:true, laxcomma:true, eqnull:true, indent:2, unused:true, undef:true, jquery:true*/
+/*global console*/
 
 /*
  * (c) 2013 Plastic Panda Snc
@@ -13,6 +15,31 @@
 
 $(function () {
 
-  
+  'use strict';
+
+  var setDimensions;
+
+  setDimensions = function () {
+      
+    var wh = $(window).height()
+      , nh = $('.navbar').outerHeight()   // not used at the moment!
+      , margin = 45
+      , bpt = parseInt($('body').css('padding-top').replace('px',''), 10);
+
+    console.log(wh, nh, margin, bpt, (wh - bpt - margin));
+
+    setTimeout(function () {
+      $('#course-iframe').css({
+        'height': (wh - bpt - margin) + 'px'
+      });
+    }, 50);
+    
+  };
+
+  setDimensions();
+
+  $(window).on('debouncedresize', function () {
+    setDimensions();
+  });
 
 });
