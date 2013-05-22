@@ -50,19 +50,20 @@ app.use(function _404handler(req, res, next) {
 app.use(function _exceptionHandler(err, req, res, next) {
   clog.error('Handling error', err);
   
-  if (err.isBoom === true) {
-    clog.error('Boom!'.red.bold.inverse);
-    
-    res.render('error', {
-      error: err
-    });
+  if (err.isBoom !== true) {
+    err = Boom.internal(err);
+  }
+  
+  if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
+    res.status(err.response.code).json({ error: err.response.code });
     
   } else {
-    res.render('error', {
-      error: Boom.internal(err)
-    , unhandled: true
+    res.status(err.response.code).render('error', {
+      error: err
+    , production: (app.get('env') === 'production')
     });
   }
+  
 });
 
 

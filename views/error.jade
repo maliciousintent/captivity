@@ -3,11 +3,14 @@ extends layout_user
 block breadcrumb
 
 block content  
+  if !production
+    pre(style='width: 90%; height: 150px; margin: auto; overflow-y: auto;') #{error.message}
+    
   .player-disabled
     p
       img.mascotte(src='/img/captivity-sad.png')
       br
       | Errore #{error.response.code}
       br
-      small #{error.message}
-  
+      
+
