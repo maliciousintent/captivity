@@ -12,12 +12,11 @@ block content
         li
           a(href='/player/#{report.course.url}') #{report.course.name} 
           | &ndash; iscritto #{moment(report.events[report.events.length - 1].created_on).format('LLL')}
-    
-  p.text-center
+
+block logged
+  li.spacer      
     small Stai svolgendo questo corso come 
       b #{user.username}
       | . Non sei 
       b #{user.name}
-      | ? 
-      a(href='/logout') Esci
-      | .
+      | ?
