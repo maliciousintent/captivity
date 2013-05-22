@@ -26,8 +26,6 @@ $(function () {
       , margin = 40
       , bpt = parseInt($('body').css('padding-top').replace('px',''), 10);
 
-    console.log(wh, nh, margin, bpt, (wh - bpt - margin));
-
     setTimeout(function () {
       $('#course-iframe').css({
         'height': (wh - nh - margin) + 'px',

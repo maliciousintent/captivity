@@ -428,6 +428,12 @@ body.user .player-container {
   height: 600px;
   margin: auto;
 }
+body.user .player-container iframe {
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
 body.user .login-container {
   height: 350px;
   width: 500px;
