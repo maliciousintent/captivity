@@ -78,6 +78,7 @@ function dashboard(req, res, next) {
       res.render('dashboard', {
         reports: reports
       , moment: moment
+      , user: req.user
       });
     });
   });

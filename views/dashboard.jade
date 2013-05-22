@@ -8,8 +8,16 @@ block content
   
   ul
     for report in reports
-      if report != null
+      if report != null && report.events
         li
           a(href='/player/#{report.course.url}') #{report.course.name} 
           | &ndash; iscritto #{moment(report.events[report.events.length - 1].created_on).format('LLL')}
     
+  p.text-center
+    small Stai svolgendo questo corso come 
+      b #{user.username}
+      | . Non sei 
+      b #{user.name}
+      | ? 
+      a(href='/logout') Esci
+      | .
