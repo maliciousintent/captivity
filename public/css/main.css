@@ -254,6 +254,29 @@ hr {
   color: #999;
   font-size: 12px;
 }
+.main .my-profile {
+  padding-top: 7px;
+  border-top: 2px solid #e2e2e2;
+}
+.main .my-profile p {
+  font-size: 13px;
+  line-height: 18px;
+}
+.main .my-profile p.large {
+  font-size: 14px;
+  line-height: 20px;
+}
+.main .my-profile small {
+  color: #999;
+}
+.main .my-profile hr {
+  height: 2px;
+  margin: 5px 0 15px;
+}
+.main h4 {
+  font-weight: normal;
+  letter-spacing: 1px;
+}
 .main .bootstrap-select .btn-dropdown {
   background-color: #fff;
   border-color: #fff;
