@@ -37,7 +37,6 @@ function _uploadToCloud(path, callback) {
 
 
 function coursesList(req, res, next) {
-  
   db.view('lms', 'courses', { include_docs: true }, function (err, doc) {
     if (err) {
       return next(err);

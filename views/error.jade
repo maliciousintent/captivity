@@ -1,0 +1,13 @@
+extends layout_user
+
+block breadcrumb
+
+block content  
+  .player-disabled
+    p
+      img.mascotte(src='/img/captivity-sad.png')
+      br
+      | Errore #{error.response.code}
+      br
+      small #{error.message}
+  

@@ -9,7 +9,8 @@ var express = require('express')
   , flash = require('connect-flash')
   , RedisStore = require('connect-redis')(express)
   , colors = require('colors')
-  , asciify = require('asciify');
+  , asciify = require('asciify')
+  , Boom = require('boom');
 
 require('sugar');
 require('string-format');
@@ -40,11 +41,29 @@ app.use(flash());
 app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.errorHandler());
-// app.use(function(err, req, res, next){
-//   console.error(err.stack);
-//   res.send(500, 'Something broke!');
-// });
+//app.use(express.errorHandler());
+
+app.use(function _404handler(req, res, next) {
+  next(Boom.notFound('Not found'));
+});
+
+app.use(function _exceptionHandler(err, req, res, next) {
+  clog.error('Handling error', err);
+  
+  if (err.isBoom === true) {
+    clog.error('Boom!'.red.bold.inverse);
+    
+    res.render('error', {
+      error: err
+    });
+    
+  } else {
+    res.render('error', {
+      error: Boom.internal(err)
+    , unhandled: true
+    });
+  }
+});
 
 
 require('./routes/users.js')(app);

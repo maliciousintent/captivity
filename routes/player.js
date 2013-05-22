@@ -11,7 +11,8 @@ var db = require('nano')(process.env.DATABASE_URL)
   , unzip = require('unzip')
   , uuid = require('node-uuid')
   , fs = require('fs')
-  , login = require('./login-utils');
+  , login = require('./login-utils')
+  , Boom = require('boom');
 
 require('sugar');
 moment.lang('it');
@@ -34,7 +35,8 @@ function player(req, res, next) {
     var course = body.rows[0].doc;
     
     if (course.enabled === false) {
-      return res.render('player_disabled', { scorm: course });
+      return next(Boom.forbidden('Spiacente, il corso è stato sospeso.'));
+      //return res.render('player_disabled', { scorm: course });
     }
     
     res.render('player', { scorm: course });
