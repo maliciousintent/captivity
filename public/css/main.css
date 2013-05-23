@@ -262,6 +262,7 @@ hr {
 }
 .main .my-courses .single-course img {
   background: url("../img/captivity-placeholder.png") center center no-repeat;
+  display: block;
   width: 80px;
   height: 80px;
   -webkit-border-radius: 40px;
