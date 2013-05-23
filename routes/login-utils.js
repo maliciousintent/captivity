@@ -125,7 +125,12 @@ module.exports.setupLogin = function (app) {
   });
   
   app.get('/logout', function _doLogout(req, res) {
-    req.session.destroy();
+    if (req.param('context') === 'user' && req.session.user_impersonate) {
+      delete req.session.user_impersonate;
+    } else {
+      req.session.destroy();
+    }
+    
     res.redirect('/');
   });
 };

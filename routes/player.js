@@ -21,6 +21,10 @@ moment.lang('it');
 function player(req, res, next) {
   var url = req.param('url')
     , user = req.user;
+    
+  if (req.user.admin) {
+    return next(Boom.forbidden('Admin role not allowed here.'));
+  }
   
   db.view('lms', 'courses-by-url', { key: url, include_docs: true }, function (err, body) {
     if (err) {
@@ -50,7 +54,11 @@ function player(req, res, next) {
 
 function dashboard(req, res, next) {
   var user_id = req.user._id;
-    
+  
+  if (req.user.admin) {
+    return next(Boom.forbidden('Admin role not allowed here.'));
+  }
+  
   db.view('lms', 'reports', { startkey: [user_id, null, null], endkey: [user_id, {}, {}], include_docs: true }, function (err, reports) {
     if (err) {
       clog.error('Error getting courses list for this user', err);
