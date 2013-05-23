@@ -65,6 +65,8 @@ module.exports.setupLogin = function (app) {
       message: req.flash('message')
     , error: req.flash('error')
     });
+    
+    req.session.destroy();
   });
   
   app.post('/login', function _processLogin(req, res, next) {
