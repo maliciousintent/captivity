@@ -8,24 +8,29 @@ html
     link(rel='shortcut icon', href='/img/favicon.ico')
         
   body.user
+    if message.length
+      .notify-alert.alert-block
+        p #{message}
+    
+    if error.length
+      .notify-alert.alert-block.alert-error
+        p 
+          strong Errore: 
+          | #{error}
+
     .main
       .login-container
         form.form-horizontal(action='/login', method='post')
           
-          if message.length
-            .alert.alert-block
-              p #{message}
-          
-          if error.length
-            .alert.alert-block.alert-error
-              p 
-                strong Errore: 
-                | #{error}
+
           
           fieldset
-            legend Accesso E-learning
-            p Inserisci il nome utente e la password che ti sono stati assegnati.
-            p &nbsp;
+            legend.text-center 
+              | Accesso E-learning
+              br
+              small Inserisci il nome utente e la password che ti sono stati assegnati.
+            
+            .spacer
             
             .control-group
               label.control-label Nome Utente

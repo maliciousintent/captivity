@@ -361,6 +361,19 @@ body.user
   background url('../img/captivity-pattern-big.png') center center no-repeat _light
   height auto
 
+  .notify-alert
+    position fixed
+    z-index 100
+    top 0
+    left 0
+    width 100%
+    text-align center
+    color #FFF
+    text-shadow none
+    background _accent
+    &.alert-error
+      background #da4f49
+
   &>.main
     margin-left 0
     &>.container
@@ -427,7 +440,7 @@ body.user
       border-radius 3px
 
   .login-container
-    height 350px
+    height 300px
     width 500px
     position absolute
     top 50%
@@ -435,11 +448,14 @@ body.user
     margin-top -(@height/2)
     margin-left -(@width/2)
 
+    legend
+      text-shadow 0 0 10px #FFF
+      line-height 30px
+      padding 10px 0
+      small
+        color #666
+
     .control-label
       font-weight normal
       color #333
       text-shadow 0 0 10px #FFF
-
-    .alert
-      text-align center
-      margin-bottom 30px
