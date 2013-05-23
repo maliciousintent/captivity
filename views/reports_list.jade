@@ -19,6 +19,12 @@ block content
       if error.length > 0
         .alert.alert-danger.alert-block
           p #{error}
+          
+      if filtered
+        .alert.alert-info.alert-block
+          p I report sono stati filtrati per utente. 
+            a(href='/reports/') Annulla
+            |  e visualizza tutti.
       
       if reports.length > 0
         table.table.table-striped#user-table
@@ -65,5 +71,6 @@ block content
                       |  Dettagli
       
       else
-        p.alert.alert-info Nessun report da visualizzare.
+        .alert.alert-block
+          p Nessun report da visualizzare.
 

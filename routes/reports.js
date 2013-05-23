@@ -20,7 +20,14 @@ function reportsList(req, res, next) {
   
   async.parallel({
     reports: function (done) {
-      db.get('_design/lms/_list/last-report-event/reports', { include_docs: true, descending: true }, function (err, body) {
+      var params = { include_docs: true, descending: true };
+      
+      if (req.param('filter_user')) {
+        params.startkey = [req.param('filter_user'), {}, {}];
+        params.endkey = [req.param('filter_user'), null, null];
+      }
+      
+      db.get('_design/lms/_list/last-report-event/reports', params, function (err, body) {
         if (err) {
           clog.error('Cannot get reports list:', err);
           return done(err);
@@ -66,6 +73,7 @@ function reportsList(req, res, next) {
     , courses: data.courses
     , users: data.users
     , moment: moment
+    , filtered: !!req.param('filter_user')
     , message: req.flash('message')
     , error: req.flash('error')
     });
