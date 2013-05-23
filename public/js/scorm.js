@@ -65,7 +65,13 @@ var API = (function () {
   SCORM.Initialize = function () {
     _debug('Initialize');
     
-    return xhr('POST', SCORM_API_PREFIX + 'Initialize', {});
+    var ret = xhr('POST', SCORM_API_PREFIX + 'Initialize', {});
+    
+    Object.keys(ret.sco_data).forEach(function (key) {
+      cache.set(key, ret.sco_data[key]);
+    });
+    
+    return ret;
   };
   
   SCORM.SetValue = function (key, value) {
@@ -83,7 +89,7 @@ var API = (function () {
       throw new Error('First parameter to SCORM.Commit *must* be an empty string.');
     }
     
-    if (!committed && cache.values().length > 0) {
+    if (!committed && Object.keys(cache.values()).length > 0) {
       committed = true;
       return xhr('POST', SCORM_API_PREFIX + 'Commit', { data: JSON.stringify(cache.values()), date: new Date() });
     } else {

@@ -47,13 +47,16 @@ var _getLastReport = function (user_id, course_id, callback) {
 var _updateSCOData = function (user_id, course_id, report_data, sco_data, callback) {
   _getLastReport(user_id, course_id, function (err, report) {
     if (typeof report.sco_data !== 'object') report.sco_data = {};
+    report.sco_data = Object.merge(report.sco_data, sco_data);
     
     db.atomic('lms', 'report', undefined, Object.merge({
       course_id: report.course_id
     , user_id: report.user_id
-    , sco_data: Object.merge(report.sco_data, sco_data)
+    , sco_data: report.sco_data
     , created_on: new Date()
-    }, report_data), callback);
+    }, report_data), function (err) {
+      callback(err, report.sco_data);
+    });
   });
 };
 
@@ -66,13 +69,13 @@ function initialize(req, res, next) {
     event_type: 'initialize'
   , event_description: 'Corso caricato'
   , extra: { 'user-agent': useragent_parser.prettyParse(req.headers['user-agent']) }
-  }, {}, function (err) {
+  }, {}, function (err, sco_data) {
     if (err) {
       clog.error('_updateSCOData error', err);
       return next(Boom.internal('_updateSCOData error'));
     }
     
-    _json(res, 200, { ok: true, x_captivity_message: 'Captivity Ready' });
+    _json(res, 200, { ok: true, sco_data: sco_data, x_captivity_message: 'Captivity Ready' });
   });
 }
 
