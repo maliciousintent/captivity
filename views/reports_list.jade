@@ -44,11 +44,11 @@ block content
                       img.image-icon(src='/img/icon-status-error.png', title='Utente o corso non sono attivi.')
                   
                   td.avoid-search
-                    | #{report.description}
+                    | #{report.event_description}
                     |  (#{moment(report.created_on).fromNow()})
 
                   td.actions.avoid-search
-                    a.btn.btn-small(href='/reports/#{report._id}', title='Guarda il dettaglio')
+                    a.btn.btn-small(href='/reports/#{report.user_id}/#{report.course_id}', title='Guarda il dettaglio')
                       i.icon-eye-open.icon-white
                       |  Dettagli
                   

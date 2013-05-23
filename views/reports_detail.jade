@@ -52,7 +52,7 @@ block content
       
       h5 Tracciamento
       
-      if report.events && report.events.length > 0
+      if reports.length > 0
         table.table.table-striped#user-table
           thead
             tr
@@ -61,11 +61,11 @@ block content
               th(style='width: auto;') Dettagli
           tbody
             
-          for event in report.events
+          for report in reports
             tr
-              td #{moment(event.created_on).format('LLL')}
-              if event.type === 'enrollment'
-                td #{event.description}
+              td #{moment(report.created_on).format('LLL')}
+              if report.event_type === 'enroll'
+                td Iscrizione al corso
                 td &ndash;
               else
                 td(colspan=2)

@@ -18,7 +18,7 @@ moment.lang('it');
 
 function reportsList(req, res, next) {
   
-  async.series({
+  async.parallel({
     reports: function (done) {
       db.get('_design/lms/_list/last-report-event/reports', { include_docs: true, reduce: false }, function (err, body) {
         if (err) {
@@ -56,13 +56,11 @@ function reportsList(req, res, next) {
     if (err) {
       return next(err);
     }
-
-    data.reports = data.reports.rows.map(function (row) { return row.doc; }).sortBy('created_on', true);
+    
+    data.reports = data.reports.sortBy('created_on', true);
     data.courses = data.courses.rows.map(function (row) { return row.doc; }).groupBy('_id'); //.map(function (row) { return row[0].doc; });
     data.users = data.users.rows.map(function (row) { return row.doc; }).groupBy('_id'); //.map(function (row) { return row[0].doc; });
-
-    clog.debug('Rendering with data', data);
-
+    
     res.render('reports_list', {
       reports: data.reports
     , courses: data.courses
@@ -76,25 +74,23 @@ function reportsList(req, res, next) {
 
 
 function reportDetail (req, res, next) {
-  var id = req.param('id');
+  var user_id = req.param('user_id')
+    , course_id = req.param('course_id');
   
-  db.get(id, function (err, doc_report) {
+  db.view('lms', 'reports', { startkey: [user_id, course_id, null], endkey: [user_id, course_id, {}], include_docs: true, reduce: false }, function (err, body) {
     if (err) {
       clog.error('Cannot get details for this report.');
       return next(err);
     }
     
-    if (doc_report.type !== 'report') {
-      clog.error('HTTP 404. Cannot get details of a non-report document.');
-      return next(new Error('Type mismatch.'));
-    }
+    var reports = body.rows.map(function (row) { return row.doc; });
     
     async.parallel({
       user: function (done) {
-        db.get(doc_report.user_id, done);
+        db.get(user_id, done);
       },
       course: function (done) {
-        db.get(doc_report.course_id, done);
+        db.get(course_id, done);
       }
     }, function (err, data) {
       if (err) {
@@ -102,10 +98,8 @@ function reportDetail (req, res, next) {
         return next(err);
       }
       
-      // data.report.events = data.report.events.orderBy('created_on'); ??
-      
       res.render('reports_detail', {
-        report: doc_report
+        reports: reports
       , user: data.user[0]
       , course: data.course[0]
       , moment: moment
@@ -120,7 +114,7 @@ module.exports = function (app) {
   var PREFIX = '/reports';
   
   app.get(PREFIX, login.requireLogin('admin'), reportsList);
-  app.get(PREFIX + '/:id', login.requireLogin('admin'), reportDetail);
+  app.get(PREFIX + '/:user_id/:course_id', login.requireLogin('admin'), reportDetail);
 };
  
  
