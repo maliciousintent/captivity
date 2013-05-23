@@ -31,7 +31,7 @@ block content
               th(style="width: 100px;") &nbsp;
           tbody
             each report in reports
-              if users[report.user_id] && users[report.user_id] && report.events && report.events.length > 0
+              if users[report.user_id] && users[report.user_id]
                 tr
                   td 
                     a(href='/users/form/#{report.user_id}') #{users[report.user_id][0].name}
@@ -44,8 +44,8 @@ block content
                       img.image-icon(src='/img/icon-status-error.png', title='Utente o corso non sono attivi.')
                   
                   td.avoid-search
-                    | #{report.events[report.events.length - 1].description}
-                    |  (#{moment(report.events[report.events.length - 1].created_on).fromNow()})
+                    | #{report.description}
+                    |  (#{moment(report.created_on).fromNow()})
 
                   td.actions.avoid-search
                     a.btn.btn-small(href='/reports/#{report._id}', title='Guarda il dettaglio')

@@ -20,13 +20,13 @@ function reportsList(req, res, next) {
   
   async.series({
     reports: function (done) {
-      db.view('lms', 'reports', { include_docs: true }, function (err, doc) {
+      db.get('_design/lms/_list/last-report-event/reports', { include_docs: true, reduce: false }, function (err, body) {
         if (err) {
           clog.error('Cannot get reports list:', err);
           return done(err);
         }
-
-        done(null, doc);
+        
+        done(null, body);
       });
     },
 

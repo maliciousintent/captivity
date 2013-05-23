@@ -201,9 +201,9 @@ function userEnroll(req, res, next) {
       if (body.ok === true) {
         clog.info('User enroll completed {0}'.format(user_id));
 
-        db.atomic('lms', 'report', '', { course_id: course_id, user_id: user_id }, function (err, body) {
+        db.atomic('lms', 'report', '', { course_id: course_id, user_id: user_id, event_type: 'enroll', event_description: 'Enrolled' }, function (err, body) {
           if (err) {
-            clog.warn('Cannot create user report document', err);
+            clog.warn('User cannot be enrolled (cannot create report).', err);
             return callback();
           }
 
@@ -218,7 +218,7 @@ function userEnroll(req, res, next) {
     
   }, function () {
     clog.ok('Users enroll completed.');
-    req.flash('message', 'Gli utenti selezionati sono stati iscritti correttamente al corso.');
+    req.flash('message', 'Gli utenti selezionati sono stati iscritti al corso.');
     res.redirect('/users');
   });
 

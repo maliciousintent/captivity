@@ -3,28 +3,20 @@
 function(doc, req) {
   var body = JSON.parse(req.body);
   
-  if (doc && doc.type !== 'report') {
-    return [null, 'Cannot update this document (design).'];
+  if (doc) {
+    return [null, 'Report documents cannot be updated.'];
   }
 
-  if (!body.action || body.action === 'create') {
-    log('Creating report document');
-
-    doc = doc || {
-      _id: req.uuid
-    , type: 'report'
-    , course_id: body.course_id
-    , user_id: body.user_id
-    , events: [{
-        created_on: new Date()
-      , type: 'enrollment'
-      , description: 'Enrollment'
-      , details: {}
-      }]
-    , created_on: new Date()
-    };
-
-  }
+  doc = doc || {
+    _id: req.uuid
+  , type: 'report'
+  , course_id: body.course_id
+  , user_id: body.user_id
+  , event_type: body.event_type
+  , event_description: body.event_description
+  , details: body.details || {}
+  , created_on: new Date()
+  };
   
   return [doc, '{ "ok": true }'];
 }
