@@ -50,6 +50,16 @@ body>.sidebar .logo img {
   width: 50px;
   height: 50px;
 }
+body>.sidebar p.what-user {
+  padding: 20px;
+  color: #999;
+  font-size: 10px;
+  text-align: right;
+  overflow: hidden;
+  white-space: nowrap;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
 body>.sidebar ul {
   border-top: 3px solid #0c0c0c;
   list-style: none;
