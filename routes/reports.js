@@ -20,7 +20,7 @@ function reportsList(req, res, next) {
   
   async.parallel({
     reports: function (done) {
-      db.get('_design/lms/_list/last-report-event/reports', { include_docs: true, reduce: false }, function (err, body) {
+      db.get('_design/lms/_list/last-report-event/reports', { include_docs: true, descending: true }, function (err, body) {
         if (err) {
           clog.error('Cannot get reports list:', err);
           return done(err);
@@ -77,7 +77,7 @@ function reportDetail (req, res, next) {
   var user_id = req.param('user_id')
     , course_id = req.param('course_id');
   
-  db.view('lms', 'reports', { startkey: [user_id, course_id, null], endkey: [user_id, course_id, {}], include_docs: true, reduce: false }, function (err, body) {
+  db.view('lms', 'reports', { startkey: [user_id, course_id, {}], endkey: [user_id, course_id, null], include_docs: true, descending: true }, function (err, body) {
     if (err) {
       clog.error('Cannot get details for this report.');
       return next(err);
