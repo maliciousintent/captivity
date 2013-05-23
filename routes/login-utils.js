@@ -127,11 +127,14 @@ module.exports.setupLogin = function (app) {
   app.get('/logout', function _doLogout(req, res) {
     if (req.param('context') === 'user' && req.session.user_impersonate) {
       delete req.session.user_impersonate;
+      res.redirect('/users');
     } else {
-      req.session.destroy();
+      delete req.session.user;
+      delete req.session.admin;
+      req.flash('message', 'Sei stato disconnesso correttamente.');
+      res.redirect('/login');
     }
     
-    res.redirect('/');
   });
 };
 
