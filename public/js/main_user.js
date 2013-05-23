@@ -14,7 +14,12 @@ $(function () {
   'use strict';
 
   window.onbeforeunload = function () {
-    return 'Sei sicuro di voler lasciare questa pagina?';
+    if (window.API) {
+      window.API.SetValue('cmi.exit', 'suspend');
+      window.API.Commit('');
+      window.API.Terminate();
+      return 'Sei sicuro di voler lasciare il corso?\nPotrai riprendere il tentativo più tardi.';
+    }
   };
 
   var setDimensions = function () {
