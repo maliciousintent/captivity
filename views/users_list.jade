@@ -86,16 +86,18 @@ block content
                     else
                       a.btn.btn-small.btn-info(href='/users/disable/#{item.doc._id}', title='Abilita Utente')
                         i.icon-ok.icon-white.no-label
-                    | &nbsp;
-                    a.btn.btn-small(href='/users/login/#{item.doc._id}', title='Login come #{item.doc.username}', disabled=item.doc.admin)
-                      i.icon-user.icon-white.no-label
+                    if !item.doc.admin
+                      | &nbsp;
+                      a.btn.btn-small(href='/users/login/#{item.doc._id}', title='Login come #{item.doc.username}')
+                        i.icon-user.icon-white.no-label
                     | &nbsp;
                     a.btn.btn-small(href='/users/form/#{item.doc._id}', title='Modifica Utente')
                       i.icon-pencil.icon-white.no-label
-                    | &nbsp;
-                    a.btn.btn-small(href='/reports/?filter_user=#{item.doc._id}', disabled=item.doc.admin)
-                      i.icon-tasks.icon-white
-                      |  Traccia
+                    if !item.doc.admin
+                      | &nbsp;
+                      a.btn.btn-small(href='/reports/?filter_user=#{item.doc._id}')
+                        i.icon-tasks.icon-white
+                        |  Traccia
       
       
       else

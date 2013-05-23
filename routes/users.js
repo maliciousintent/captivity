@@ -32,7 +32,7 @@ function usersList(req, res, next) {
       }
       
       res.render('users_list', {
-        users: doc.rows
+        users: doc.rows.sortBy(function (row) { return !!row.doc.admin; }, true)
       , courses: courses_doc.rows
       , moment: moment
       , message: req.flash('message')

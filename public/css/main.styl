@@ -225,14 +225,33 @@ hr
           border-color lighten(#5bb75b, 60%)
 
   .my-courses
+    wh = 80px
     margin 0
     list-style none
-    li
-      padding 7px 0
+    .single-course
+      padding 15px 0
       border-top 2px solid #E2E2E2
-    em
-      color #999
-      font-size 12px
+      img
+        background url('../img/captivity-placeholder.png') center center no-repeat
+        width wh
+        height wh
+        border-radius (wh/2)
+        border-radius bottom left 0
+    .single-course-info
+      height wh
+      display table
+      width 100%
+      &>div
+        display table-cell
+        vertical-align middle
+        font-size 17px
+      em
+        color #999
+        font-size 12px
+    .description
+      margin-top 10px
+      p
+        margin-bottom 0
 
   .my-profile
     padding-top 7px
@@ -241,6 +260,7 @@ hr
       font-size 13px
       line-height 18px
     p.large
+      padding-top 2px
       font-size 14px
       line-height 20px
     small
