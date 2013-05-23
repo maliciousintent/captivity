@@ -45,15 +45,13 @@ block content
         b iscrizione (enrollment), iniziato, sospeso, abbandonato, completato
         | . Per alcune tipolgie di tracciamento sono previsti dettagli aggiuntivi.
 
-  hr
-
   .row
     .span12
       
       h5 Tracciamento
       
       if reports.length > 0
-        table.table.table-striped#user-table
+        table.table.table-striped.table-condensed#user-table
           thead
             tr
               th(style='width: 180px;') Data
@@ -64,19 +62,27 @@ block content
           for report in reports
             tr
               td #{moment(report.created_on).format('LLL')}
+              td #{report.event_description}
               if report.event_type === 'enroll'
-                td Iscrizione al corso
                 td &ndash;
               else if report.event_type === 'initialize'
-                td Corso aperto
                 td
                   if report.extra
                     strong Browser: 
                     | #{report.extra['user-agent']}
+              else if report.event_type === 'commit'
+                td
+                  strong Ultima slide: 
+                  | #{report.sco_data['cmi.location']} 
+                  | &ndash; 
+                  strong Modo uscita: 
+                  | #{report.sco_data['cmi.exit']} 
+                  | &ndash; 
+                  strong Completamento:  
+                  | #{report.sco_data['cmi.completion_status']} (#{report.sco_data['cmi.success_status'] || '-'})
+
               else
-                td(colspan=2)
-                  span.label.label-important Errore
-                  |  tracciamento sconosciuto
+                td &ndash;
               
       else
         .alert.alert-danger.alert-block
