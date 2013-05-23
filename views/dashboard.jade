@@ -11,10 +11,13 @@ block content
         ul.my-courses
   
           for report in reports
-            if report != null && report.events
+            if report != null
               li
                 a(href='/player/#{report.course.url}') #{report.course.name}
-                em.pull-right iscritto #{moment(report.events[report.events.length - 1].created_on).format('LLL')}
+                em.pull-right iscritto #{moment(report.created_on).format('LLL')}
+                .description
+                   !{report.course.description}
+                
       .span3.offset1
         h4 Il mio profilo
         .my-profile
@@ -25,8 +28,9 @@ block content
           hr
           p #{user.company}
           p #{user.email}
+          
 block logged
   li.spacer      
-    small Stai svolgendo questo corso come 
+    small Sei collegato come 
       b #{user.username}
       | .

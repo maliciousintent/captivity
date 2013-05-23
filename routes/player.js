@@ -59,13 +59,15 @@ function dashboard(req, res, next) {
     return next(Boom.forbidden('Admin role not allowed here.'));
   }
   
-  db.view('lms', 'reports', { startkey: [user_id, null, null], endkey: [user_id, {}, {}], include_docs: true }, function (err, reports) {
+  db.get('_design/lms/_list/last-report-event/reports', { endkey: [user_id, null, null], startkey: [user_id, {}, {}], include_docs: true, descending: true }, function (err, reports) {
     if (err) {
       clog.error('Error getting courses list for this user', err);
       return next(err);
     }
     
-    var courses_ids = reports.rows.map(function (row) { return row.doc.course_id; }).unique()
+    clog.warn('reports', reports);
+    
+    var courses_ids = reports.map(function (row) { return row.course_id; }).unique()
       , courses;
     
     db.view('lms', 'courses', { keys: courses_ids, include_docs: true }, function (err, courses) {
@@ -74,12 +76,11 @@ function dashboard(req, res, next) {
         return next(err);
       }
       
-      courses = courses.rows.map(function (row) { return row.doc; }).groupBy('_id');      
-      reports = reports.rows.map(function _expandDoc(row) {
-        clog.warn('id', row.doc.course_id);
-        if (courses[row.doc.course_id] != null) {
-          row.doc.course = courses[row.doc.course_id][0];        
-          return row.doc;
+      courses = courses.rows.map(function (row) { return row.doc; }).groupBy('_id');
+      reports = reports.map(function _expandDoc(row) {
+        if (courses[row.course_id] != null) {
+          row.course = courses[row.course_id][0];        
+          return row;
         }
       });
       
