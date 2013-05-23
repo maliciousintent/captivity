@@ -23,6 +23,7 @@
     "commander": "~1.1.1",
     "bcrypt": "~0.7.5",
     "connect-redis": "~1.4.5",
-    "boom": "~0.4.2"
+    "boom": "~0.4.2",
+    "useragent_parser": "~1.0.0"
   }
 }

@@ -67,6 +67,12 @@ block content
               if report.event_type === 'enroll'
                 td Iscrizione al corso
                 td &ndash;
+              else if report.event_type === 'initialize'
+                td Corso aperto
+                td
+                  if report.extra
+                    strong Browser: 
+                    | #{report.extra['user-agent']}
               else
                 td(colspan=2)
                   span.label.label-important Errore
