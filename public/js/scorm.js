@@ -114,8 +114,6 @@ var API = (function () {
     
   SCORM.Terminate = function () {
     _debug('Terminate');
-    
-    SCORM.Commit('');
     xhr('POST', SCORM_API_PREFIX + 'Terminate', {});
   };
   
