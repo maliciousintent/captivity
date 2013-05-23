@@ -31,9 +31,10 @@ block content
           label Nome
         .controls
           input.input-block-level(type='text', name='name', value=pagina.name || '', required)
-          .help-block
-            .label.label-important Attenzione!
-            |  Assicurati che non ci siano utenti collegati prima di modificare il nome del corso.
+          if pagina._id
+            .help-block
+              .label.label-important Attenzione!
+              |  Assicurati che non ci siano utenti collegati prima di modificare il nome del corso.
 
       .control-group
         .control-label
