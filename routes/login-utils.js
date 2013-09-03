@@ -4,7 +4,7 @@
 
 var db = require('nano')(process.env.DATABASE_URL)
   , async = require('async')
-  , clog = require('clog')
+  , clog = require('coolog').logger('login-utils.js')
   , bcrypt = require('bcrypt');
   
 

@@ -5,7 +5,7 @@
 var db = require('nano')(process.env.DATABASE_URL)
   , async = require('async')
   , sugar = require('sugar')
-  , clog = require('clog')
+  , clog = require('coolog').logger('scorm_api.js')
   , useragent_parser = require('useragent_parser')
   , Boom = require('boom')
   , _json = function (res, status, obj) {

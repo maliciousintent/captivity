@@ -5,7 +5,7 @@
 var express = require('express')
   , http = require('http')
   , path = require('path')  
-  , clog = require('clog')
+  , clog = require('coolog').logger('app.js')
   , flash = require('connect-flash')
   , RedisStore = require('connect-redis')(express)
   , colors = require('colors')

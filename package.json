@@ -10,7 +10,6 @@
     "stylus": "*",
     "async": "~0.2.8",
     "nano": "~3.3.8",
-    "clog": "git://github.com/lusentis/clog",
     "sugar": "~1.3.8",
     "colors": "~0.6.0-1",
     "asciify": "~1.2.0",
@@ -24,6 +23,7 @@
     "bcrypt": "~0.7.5",
     "connect-redis": "~1.4.5",
     "boom": "~0.4.2",
-    "useragent_parser": "~1.0.0"
+    "useragent_parser": "~1.0.0",
+    "coolog": "~2.1.2"
   }
 }
