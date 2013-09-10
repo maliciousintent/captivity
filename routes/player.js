@@ -44,9 +44,12 @@ function player(req, res, next) {
       //return res.render('player_disabled', { scorm: course });
     }
     
+    console.log('rendering course', course, (course.scorm + '/' + course.scorm_index));
+    
     res.render('player', {
       course: course
     , user: user
+    , iframe_src: (course.scorm + '/' + course.scorm_index)
     });
   });
 }

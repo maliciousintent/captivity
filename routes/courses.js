@@ -2,6 +2,7 @@
 
 'use strict';
 
+require('sugar');
 var db = require('nano')(process.env.DATABASE_URL)
   , async = require('async')
   , sugar = require('sugar')
@@ -10,28 +11,38 @@ var db = require('nano')(process.env.DATABASE_URL)
   , tmp = require('tmp')
   , unzip = require('unzip')
   , uuid = require('node-uuid')
+  , spawn = require('child_process').spawn
   , fs = require('fs')
-  , login = require('./login-utils');
+  , login = require('./login-utils')
+  ;
 
-require('sugar');
 moment.lang('it');
-
-
-if (!fs.existsSync('public/temp')) {
-  fs.mkdirSync('public/temp');
-}
-
 
 function _uploadToCloud(path, callback) {
   // should recursively upload "path" to a cloud storage
   // when done callback gets called with the cloud base path
+  // 
+  // @REQUIRES pip install awscli
+  // 
+  
   var id = uuid.v4()
-    , UPLOAD_CLOUD_DIR = process.cwd() + '/public/temp/' + id;
+    , S3_BUCKET = 'media-captivity'
+    , s3_object_url = 'https://s3-eu-west-1.amazonaws.com/' + S3_BUCKET + '/' + id
+    ;
   
   clog.debug('Cloud uploading {0} with id {1}'.format(path, id));
   
-  fs.rename(path, UPLOAD_CLOUD_DIR, function (err) {
-    callback(err, '/temp/' + id);
+  var sync = spawn('aws', ['s3', 'sync', path, 's3://' + S3_BUCKET + '/' + id + '/']);
+  
+  sync.on('close', function (code) {
+    if (code !== 0) {
+      clog.error('Cloud upload failed with exit code', code);
+      callback(new Error('Cloud upload failed with exit code ' + code));
+      return;
+    }
+    
+    clog.ok('Cloud upload completed to', s3_object_url);
+    callback(null, s3_object_url);
   });
 }
 
