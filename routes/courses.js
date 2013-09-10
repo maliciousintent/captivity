@@ -32,7 +32,7 @@ function _uploadToCloud(path, callback) {
   
   clog.debug('Cloud uploading {0} with id {1}'.format(path, id));
   
-  var sync = spawn('aws', ['s3', 'sync', path, 's3://' + S3_BUCKET + '/' + id + '/']);
+  var sync = spawn('aws', ['s3', 'cp', '--recursive', path, 's3://' + S3_BUCKET + '/' + id + '/']);
   
   sync.on('close', function (code) {
     if (code !== 0) {
